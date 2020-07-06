@@ -1,4 +1,4 @@
-\documentclass[letterpaper,10pt]{article}
+\documentclass[letterpaper,11pt]{article}
 % Soporte para los acentos.
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -82,6 +82,7 @@
         tenemos que $k \equiv l \pmod{n}$, lo que implica que $k = l$.
         
         Por lo tanto, $\{a,2a,3a,...,(n-1)a\} = \{1,2,...,n-1\}$.
+    
     \end{proof}
 
     
@@ -94,7 +95,7 @@
     que $a^{-1}$ es el inverso de $a$ en $Z_{m}$. Una unidad es un elemento
     $x$ que es invertible módulo $m$. Para calcular todas las unidades de 
     $\mathbb{Z}_{156}$ lo que hicimos fue implementar el algoritmo extendido de
-    Euclides en Python junto con una función $main()$ que se encarga de 
+    Euclides en Python junto con una función $unidades()$ que se encarga de 
     calcular las unidades.
     
     Para la implementación del $AEE$ simplemente seguimos el procedimiento que
@@ -138,7 +139,7 @@
             return (g_i, s_i, t_i)
 
         # Calcula todas las unidades en Z_{156}.
-        def main():
+        def unidades():
             for i in range(0, 156):
                 g, s, t = aee(i, 156)
                 # El inverso multiplicativo de a modulo m existe sii (a,m) = 1
@@ -149,7 +150,7 @@
                     print("(" + str(i) + ", " + str(inverso) + ")")
             
         if __name__ == "__main__":
-            main()
+            unidades()
     \end{lstlisting}
     
     Después de ejecutar el programa, obtenemos $48$ unidades, las cuales son:
@@ -377,59 +378,60 @@
     % Ejercicio 4.
     \item Dado el siguiente texto cifrado
     \begin{verbatim}
-        ORNOQM PTO ORSO KOLRJFO IOR JNMQSO KJR OL IM PTO GDEO, PTO
-        OI GOREDAQJQIM. ORSJL OLSQJLGM JI KTLGM GO IJ EQDNSMBQJADJ Y IJ
-        ROBTQDGJG Y NJQJ JPTOIIMR PTO ORSOL DLSOQORJGMR OL IJ EQDNSMBQ-
-        JADJ IOR NQMNMLBM PTO AMQKOL TL BQTNM Y ORSO IM GDVDGJL OL
-        GMR RTUBQTNMR TLM EDAQJQJ Y OI MSQM RTUBQTNM GOREDAQJQJ. OI
-        QOSM OR OI RDBTDOLSO: OI RTUBQTNM PTO EDAQJ OLEQDNSJ TL KOLRJ-
-        FO Y IM OLVDJ EDAQJGM J OI RTUBQTNM PTO GOREDAQJ GDEDOLGM PTO
-        EDAQJGM TRM Y LM KJR DLAMQKJEDML. RD OI BQTNM PTO GOREDAQJ
-        SQJGTEO OI KOLRJFO RO FTLSJL Y RJEJL EMLEITRDMLOR GO PTO AJISJ
-        NJQJ KOFMQJQ OI EDAQJGM, OL EJRM EMLSQJQDM OI RTUBQTNM PTO
-        EDAQJ JNMYJ JI PTO GOREDAQJ NJQJ PTO JVJLEO OI BQTNM. EMKDOLEOL
-        EML IMR EDAQJGMR KJR ROLEDIIMR EMKM KMLMJIAJUOSDEMR, GORN-
-        TOR IMR NMIDJIAJUOSDEMR, ITOBM IMR EDAQJGMR OL UIMPTOR EMKM
-        CDII Y JRD. OR KTY DKNMQSJLSO SOLOQ OL ETOLSJ PTO RML TL BQTNM Y
-        PTO GOUOL JNMYJQRO OLSQO RD. ORSJR NQJESDEJR IOR GJQJL KJGTQOZ
-        Y OXNOQDOLEDJ, OI RDBTDOLSO NJRM OR DKNIOKOLSJQIM OL IJ VDGJ
-        EMSDGDJLJ, NMQ OFOKNIM GJGM ETJIPTDOQ JQECDVM, AQJBKOLSJQIM,
-        EDAQJQIM Y GOFJLGMIM OL OI KDRKM AMQKJSM, GORNTOR IJ NJQSO
-        PTO GOREDAQJ, DKNIOKOLSJ OI JIBMQDSKM GO GOREDAQJGM GOFJLGM
-        OI JQECDVM EMKM OI MQDBDLJI. QOETOQGOL PTO OL ORSJ NJQSO OR
-        KTY DKNMQSJLSO PTO TRSOGOR CJBJL SMGMR IMR NQMBQJKJR SJLSM
-        NJQJ EDAQJQ EMKM NJQJ GOREDAQJQ, YJ PTO OI METNJQ RMAWJQO GO
-        SOQEOQMR EMKNQMKOSO SMGM OI SQJUJFM. TLJ VOZ COECM ORSM RO
-        GJQJL ETOLSJ GO PTO KTECJR NOQRMLJR LOEORDSJL GO RTR ROQV-
-        DEDMR Y JI CJEOQ ORSJR NQJESDEJR OL OI AMLGM RO ORSJL NQONJQJLGM
-        KOQEJGM IJUMQJI Y LM EMKM OKNIOJGMR RDLM EMKM OKNQORJQDMR.
-        IJ VOLSJFJ GO CJEOQIM GO ORSJ KJLOQJ, OR PTO OL OI KOQEJGM JESTJI
-        IJR NOPTOLJR OKNQORJR LOEORDSJL GO TRSOGOR NJQJ EQOEOQ LOEORDSJLGM
-        GO TLJ EQDNSMBQJADJ KJR NOQRMLJIDZJGJ Y KOLMR EMKOQEDJI UQDLGJLGM
-        JRD KJR EMLADJLZJ OL IJR OKNQORJR M NOQRMLJR PTO EMLSQJSJL LTORSQMR
-        ROQVDEDMR, NMQPTO IJR BQJLGOR OKNQORJR PTO JESTJIKOLSO UQDLGJL
-        ORO ROQVDEDM CJL AJIIJGM. NMQ OFOKNIM OL OI GMR KDI PTDLEO OI
-        OREJLGJIM GO ORNDMLJFO NMQ NJQSO GO BMMBIO J NOQRMLJR Y OKN-
-        QORJR GO IJ EMKTLDGJG OTQMNOJ, IJR ETJIOR QONOQETSDOQML SJLSM
-        NMIDSDEJKOLSO EMKM OEMLMKDEJKOLSO, ORSO SDNM GO JEMLSOEDK-
-        DOLSMR JUQO NTOQSJR NJQJ NOQRMLJR EMKM LMRMSQMR YJ PTO IJ GO-
-        REMLADJLZJ GO IJR BQJLGOR OKNQORJR PTO RO GOGDEJL J IJ ROBTQDGJG
-        EMKNTSJEDMLJI RO CJ NTORSM OL SOIJ GO FTDEDM, NMQ ORM OR DKNMQSJL-
-        SO PTO GORGO JCMQDSJ EMKDOLEOL J SQJUJFJQ IJR NOQRMLJR PTO
-        ORSJL DLSOQORJGJR. LM ROQJ AJEDI, NOQM LJGJ PTO VJIBJ IJ NOLJ OR
-        AJEDI. RJITGMR Y UDOLVOLDGMR JI ETQRM ORNOQJKMR PTO IM GDRAQT-
-        SOL.
+    ORNOQM PTO ORSO KOLRJFO IOR JNMQSO KJR OL IM PTO GDEO, PTO
+    OI GOREDAQJQIM. ORSJL OLSQJLGM JI KTLGM GO IJ EQDNSMBQJADJ Y IJ
+    ROBTQDGJG Y NJQJ JPTOIIMR PTO ORSOL DLSOQORJGMR OL IJ EQDNSMBQ-
+    JADJ IOR NQMNMLBM PTO AMQKOL TL BQTNM Y ORSO IM GDVDGJL OL
+    GMR RTUBQTNMR TLM EDAQJQJ Y OI MSQM RTUBQTNM GOREDAQJQJ. OI
+    QOSM OR OI RDBTDOLSO: OI RTUBQTNM PTO EDAQJ OLEQDNSJ TL KOLRJ-
+    FO Y IM OLVDJ EDAQJGM J OI RTUBQTNM PTO GOREDAQJ GDEDOLGM PTO
+    EDAQJGM TRM Y LM KJR DLAMQKJEDML. RD OI BQTNM PTO GOREDAQJ
+    SQJGTEO OI KOLRJFO RO FTLSJL Y RJEJL EMLEITRDMLOR GO PTO AJISJ
+    NJQJ KOFMQJQ OI EDAQJGM, OL EJRM EMLSQJQDM OI RTUBQTNM PTO
+    EDAQJ JNMYJ JI PTO GOREDAQJ NJQJ PTO JVJLEO OI BQTNM. EMKDOLEOL
+    EML IMR EDAQJGMR KJR ROLEDIIMR EMKM KMLMJIAJUOSDEMR, GORN-
+    TOR IMR NMIDJIAJUOSDEMR, ITOBM IMR EDAQJGMR OL UIMPTOR EMKM
+    CDII Y JRD. OR KTY DKNMQSJLSO SOLOQ OL ETOLSJ PTO RML TL BQTNM Y
+    PTO GOUOL JNMYJQRO OLSQO RD. ORSJR NQJESDEJR IOR GJQJL KJGTQOZ
+    Y OXNOQDOLEDJ, OI RDBTDOLSO NJRM OR DKNIOKOLSJQIM OL IJ VDGJ
+    EMSDGDJLJ, NMQ OFOKNIM GJGM ETJIPTDOQ JQECDVM, AQJBKOLSJQIM,
+    EDAQJQIM Y GOFJLGMIM OL OI KDRKM AMQKJSM, GORNTOR IJ NJQSO
+    PTO GOREDAQJ, DKNIOKOLSJ OI JIBMQDSKM GO GOREDAQJGM GOFJLGM
+    OI JQECDVM EMKM OI MQDBDLJI. QOETOQGOL PTO OL ORSJ NJQSO OR
+    KTY DKNMQSJLSO PTO TRSOGOR CJBJL SMGMR IMR NQMBQJKJR SJLSM
+    NJQJ EDAQJQ EMKM NJQJ GOREDAQJQ, YJ PTO OI METNJQ RMAWJQO GO
+    SOQEOQMR EMKNQMKOSO SMGM OI SQJUJFM. TLJ VOZ COECM ORSM RO
+    GJQJL ETOLSJ GO PTO KTECJR NOQRMLJR LOEORDSJL GO RTR ROQV-
+    DEDMR Y JI CJEOQ ORSJR NQJESDEJR OL OI AMLGM RO ORSJL NQONJQJLGM
+    KOQEJGM IJUMQJI Y LM EMKM OKNIOJGMR RDLM EMKM OKNQORJQDMR.
+    IJ VOLSJFJ GO CJEOQIM GO ORSJ KJLOQJ, OR PTO OL OI KOQEJGM JESTJI
+    IJR NOPTOLJR OKNQORJR LOEORDSJL GO TRSOGOR NJQJ EQOEOQ LOEORDSJLGM
+    GO TLJ EQDNSMBQJADJ KJR NOQRMLJIDZJGJ Y KOLMR EMKOQEDJI UQDLGJLGM
+    JRD KJR EMLADJLZJ OL IJR OKNQORJR M NOQRMLJR PTO EMLSQJSJL LTORSQMR
+    ROQVDEDMR, NMQPTO IJR BQJLGOR OKNQORJR PTO JESTJIKOLSO UQDLGJL
+    ORO ROQVDEDM CJL AJIIJGM. NMQ OFOKNIM OL OI GMR KDI PTDLEO OI
+    OREJLGJIM GO ORNDMLJFO NMQ NJQSO GO BMMBIO J NOQRMLJR Y OKN-
+    QORJR GO IJ EMKTLDGJG OTQMNOJ, IJR ETJIOR QONOQETSDOQML SJLSM
+    NMIDSDEJKOLSO EMKM OEMLMKDEJKOLSO, ORSO SDNM GO JEMLSOEDK-
+    DOLSMR JUQO NTOQSJR NJQJ NOQRMLJR EMKM LMRMSQMR YJ PTO IJ GO-
+    REMLADJLZJ GO IJR BQJLGOR OKNQORJR PTO RO GOGDEJL J IJ ROBTQDGJG
+    EMKNTSJEDMLJI RO CJ NTORSM OL SOIJ GO FTDEDM, NMQ ORM OR DKNMQSJL-
+    SO PTO GORGO JCMQDSJ EMKDOLEOL J SQJUJFJQ IJR NOQRMLJR PTO
+    ORSJL DLSOQORJGJR. LM ROQJ AJEDI, NOQM LJGJ PTO VJIBJ IJ NOLJ OR
+    AJEDI. RJITGMR Y UDOLVOLDGMR JI ETQRM ORNOQJKMR PTO IM GDRAQT-
+    SOL.
     \end{verbatim}
     
     \begin{enumerate}
+        % Ejercicio 4.a
         \item Hacer análisis de frecuencias.
         
         \textsc{Solución:}
         Realizamos el análisis de frecuencias de cada una de las letras 
-        (manualmente) y colocamos los resultados obtenidos en una bonita tabla
-        \begin{table}[h]
+        (manualmente) y colocamos los resultados obtenidos en una bonita tabla:
+
         \begin{center}
-        \begin{tabular}{|l|l|l|}
+        \begin{tabular}{|c|c|c|}
         \hline
         Letra & No. Apariciones & Frecuencia \\
         \hline 
@@ -445,9 +447,17 @@
         J & 242 &11.6$\%$ \\ \hline 
         K & 65 & 3.1$\%$ \\ \hline 
         L & 134 & 6.4$\%$ \\ \hline 
-        M & 184 & 8.8$\%$ \\ \hline 
+        M & 184 & 8.8$\%$ \\ \hline
         N & 78 & 3.7$\%$ \\ \hline 
         O & 294 & 14.1$\%$ \\ \hline
+        \end{tabular}
+        \end{center}
+
+        \begin{center}
+        \begin{tabular}{|c|c|c|}
+        \hline
+        Letra & No. Apariciones & Frecuencia \\
+        \hline
         P & 35 &1.6$\%$ \\ \hline 
         Q & 151 & 7.2$\%$ \\ \hline 
         R & 169 & 8.1$\%$ \\ \hline 
@@ -460,27 +470,24 @@
         Y & 22 & 1.0$\%$ \\ \hline 
         Z & 5 & 0.2$\%$ \\ \hline 
         \end{tabular}
-        \caption{Análisis de frecuencias}
-        \label{tabla:sencilla}
         \end{center}
-        \end{table}
         
-        \newpage
+        % Ejercicio 4.b
         \item Dar la clave de cifrado.
         \begin{verbatim}
-            A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
-            J U E G O A B C D F H I K L M N P R S T U V W X Y Z
+        A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+        J U E G O A B C D F H I K L M N P R S T U V W X Y Z
         \end{verbatim}
         
-        Clave: Juego
+        \textsc{Solución:} Juego
 
+        % Ejercicio 4.c
         \item Dar la regla de descifrado.
         
-        \textsc{Solución:}
-        Tomemos en cuenta las letras más usadas en español
-        \begin{table}[h]
+        \textsc{Solución:} Tomemos en cuenta las letras más usadas en español
+
         \begin{center}
-        \begin{tabular}{|l|l|}
+        \begin{tabular}{|c|c|}
         \hline
         Letra & Frecuencia \\
         \hline 
@@ -492,19 +499,16 @@
         N & 6.71$\%$ \\ \hline 
         I & 6.25$\%$ \\ \hline 
         \end{tabular}
-        \caption{Letras más utilizadas}
-        \label{tabla:sencilla}
         \end{center}
-        \end{table}
         
-        Realizamos una sustitución de las letras mas usadas del español con 
-        las más usadas en el texto, haremos esto en los primeros tres 
-        renglones del texto cifrado, de donde obtenemos:
+        Realizamos una sustitución de las letras mas usadas del español con las
+        más usadas en el texto, haremos esto en los primeros tres renglones del 
+        texto cifrado, de donde obtenemos:
         
         \begin{verbatim}
-            ESNERO PTE ESSE KENSAFE IES ANORSE KAS EN IO PTE GIEE, PTE EI
-            GESEIARARIO. ESSAN ENSRANGO AI KTNGO GE IA ERINSOBRAAIA Y IA
-            SEBTRIGAG Y NARA APTEIIOS PTE ESSEN INSERESAGOS EN IA ERINSOBRAAIA
+        ESNERO PTE ESSE KENSAFE IES ANORSE KAS EN IO PTE GIEE, PTE EI
+        GESEIARARIO. ESSAN ENSRANGO AI KTNGO GE IA ERINSOBRAAIA Y IA
+        SEBTRIGAG Y NARA APTEIIOS PTE ESSEN INSERESAGOS EN IA ERINSOBRAAIA
         \end{verbatim}
         
         Entonces
@@ -518,6 +522,7 @@
             D $\rightarrow$ I
         \end{center}
         
+        \newpage
         De este fragmento podemos deducir que 
         \begin{center}
             N $\rightarrow$ P \\
@@ -531,9 +536,9 @@
         
         Con esto obtenemos que 
         \begin{verbatim}
-            ESPERO PTE ESTE MENSAJE LES APORTE MAS EN LO PTE DIEE, PTE EL
-            DESEIARARLO. ESTAN ENTRANDO AL MTNDO DE LA ERIPTOBRAAIA Y LA
-            SEBTRIDAD Y PARA APTELLOS PTE ESTEN INTERESADOS EN LA ERIPTOBRAAIA
+        ESPERO PTE ESTE MENSAJE LES APORTE MAS EN LO PTE DIEE, PTE EL
+        DESEIARARLO. ESTAN ENTRANDO AL MTNDO DE LA ERIPTOBRAAIA Y LA
+        SEBTRIDAD Y PARA APTELLOS PTE ESTEN INTERESADOS EN LA ERIPTOBRAAIA
         \end{verbatim}
         
         Por contexto, deducimos que 
@@ -547,9 +552,9 @@
         
         de donde obtenemos
         \begin{verbatim}
-            ESPERO QUE ESTE MENSAJE LES APORTE MAS DE LO QUE DICE, QUE EL
-            DESCIFRARLO. ESTAN ENTRANDO AL MUNDO DE LA CRIPTOGRAFIA Y LA
-            SEGURIDAD Y PARA AQUELLOS QUE ESTEN INTERESADOS EN LA CRIPTOGRAFIA
+        ESPERO QUE ESTE MENSAJE LES APORTE MAS DE LO QUE DICE, QUE EL
+        DESCIFRARLO. ESTAN ENTRANDO AL MUNDO DE LA CRIPTOGRAFIA Y LA
+        SEGURIDAD Y PARA AQUELLOS QUE ESTEN INTERESADOS EN LA CRIPTOGRAFIA
         \end{verbatim}
         
         Sustituyendo en el texto tenemos que 
@@ -562,49 +567,50 @@
             Z $\rightarrow$ Z
         \end{center}
 
+        % Ejercicio 4.d
         \item Descifrar el mensaje.
         
         \textsc{Solución:}
         \begin{verbatim}
-            Espero que este mensaje les aporte mas en lo que dice que el 
-            descifrarlo estan entrando al mundo de la criptografia y la 
-            seguridad y para aquellos que esten interesados en la criptografia 
-            les propongo que formen un grupo y este lo dividan en dos subgrupos 
-            uno cifrara y el otro subgrupo descifrara el reto es el siguiente 
-            el subgrupo que cifra encripta un mensaje y lo envia cifrado a el 
-            subgrupo que descifra diciendo que cifrado uso y no mas informacion 
-            si el grupo que descifra traduce el mensaje se juntan y sacan 
-            conclusiones de que falta para mejorar el cifrado en caso contrario 
-            el subgrupo que cifra apoya al que descifra para que avance el 
-            grupo comiencen con los cifrados mas sencillos como monoalfabeticos 
-            despues los polialfabeticos luego los cifrados en bloques como hill 
-            y asi es muy importante tener en cuenta que son un grupo y que 
-            deben apoyarse entre si estas practicas les daran madurez y 
-            experiencia el siguiente paso es implementarlo en la vida cotidiana 
-            por ejemplo dado cualquier archivo fragmentarlo cifrarlo y dejandolo 
-            en el mismo formato despues la parte que descifra implementa el 
-            algoritmo de descifrado dejando el archivo como el original 
-            recuerden que en esta parte es muy importante que ustedes hagan 
-            todos los programas tanto para cifrar como para descifrar ya que el 
-            ocupar sofware de terceros compromete todo el trabajo una vez hecho 
-            esto se daran cuenta de que muchas personas necesitan de sus 
-            servicios y al hacer estas practicas en el fondo se estan 
-            preparando mercado laboral y no como empleados sino como 
-            empresarios la ventaja de hacerlo de esta manera es que en el 
-            mercado actual las pequenas empresas necesitan de ustedes 
-            para crecer necesitando de una criptografia mas personalizada y 
-            menos comercial brindando asi mas confianza en las empresas o 
-            personas que contratan nuestros servicios porque las grandes 
-            empresas que actualmente brindan ese servicio han fallado por
-            ejemplo en el dos mil quince el escandalo de espionaje por parte de
-            google a personas y empresas de la comunidad europea las cuales 
-            repercutieron tanto politicamente como economicamente este tipo de 
-            acontecimientos abre puertas para personas como nosotros ya que la 
-            desconfianza de las grandes empresas que se dedican a la seguridad 
-            computacional se ha puesto en tela de juicio por eso es importante 
-            que desde ahorita comiencen a trabajar las personas que estan 
-            interesadas no sera facil pero nada que valga la pena es facil 
-            saludos y bienvenidos al curso esperamos que lo disfruten.
+        ESPERO QUE ESTE MENSAJE LES APORTE MAS EN LO QUE DICE QUE EL 
+        DESCIFRARLO ESTAN ENTRANDO AL MUNDO DE LA CRIPTOGRAFIA Y LA 
+        SEGURIDAD Y PARA AQUELLOS QUE ESTEN INTERESADOS EN LA CRIPTOGRAFIA 
+        LES PROPONGO QUE FORMEN UN GRUPO Y ESTE LO DIVIDAN EN DOS SUBGRUPOS 
+        UNO CIFRARA Y EL OTRO SUBGRUPO DESCIFRARA EL RETO ES EL SIGUIENTE 
+        EL SUBGRUPO QUE CIFRA ENCRIPTA UN MENSAJE Y LO ENVIA CIFRADO A EL 
+        SUBGRUPO QUE DESCIFRA DICIENDO QUE CIFRADO USO Y NO MAS INFORMACION     
+        SI EL GRUPO QUE DESCIFRA TRADUCE EL MENSAJE SE JUNTAN Y SACAN 
+        CONCLUSIONES DE QUE FALTA PARA MEJORAR EL CIFRADO EN CASO CONTRARIO 
+        EL SUBGRUPO QUE CIFRA APOYA AL QUE DESCIFRA PARA QUE AVANCE EL     
+        GRUPO COMIENCEN CON LOS CIFRADOS MAS SENCILLOS COMO MONOALFABETICOS 
+        DESPUES LOS POLIALFABETICOS LUEGO LOS CIFRADOS EN BLOQUES COMO HILL 
+        Y ASI ES MUY IMPORTANTE TENER EN CUENTA QUE SON UN GRUPO Y QUE 
+        DEBEN APOYARSE ENTRE SI ESTAS PRACTICAS LES DARAN MADUREZ Y 
+        EXPERIENCIA EL SIGUIENTE PASO ES IMPLEMENTARLO EN LA VIDA COTIDIANA 
+        POR EJEMPLO DADO CUALQUIER ARCHIVO FRAGMENTARLO CIFRARLO Y DEJANDOLO 
+        EN EL MISMO FORMATO DESPUES LA PARTE QUE DESCIFRA IMPLEMENTA EL 
+        ALGORITMO DE DESCIFRADO DEJANDO EL ARCHIVO COMO EL ORIGINAL 
+        RECUERDEN QUE EN ESTA PARTE ES MUY IMPORTANTE QUE USTEDES HAGAN 
+        TODOS LOS PROGRAMAS TANTO PARA CIFRAR COMO PARA DESCIFRAR YA QUE EL 
+        OCUPAR SOFWARE DE TERCEROS COMPROMETE TODO EL TRABAJO UNA VEZ HECHO 
+        ESTO SE DARAN CUENTA DE QUE MUCHAS PERSONAS NECESITAN DE SUS 
+        SERVICIOS Y AL HACER ESTAS PRACTICAS EN EL FONDO SE ESTAN  
+        PREPARANDO MERCADO LABORAL Y NO COMO EMPLEADOS SINO COMO 
+        EMPRESARIOS LA VENTAJA DE HACERLO DE ESTA MANERA ES QUE EN EL 
+        MERCADO ACTUAL LAS PEQUENAS EMPRESAS NECESITAN DE USTEDES 
+        PARA CRECER NECESITANDO DE UNA CRIPTOGRAFIA MAS PERSONALIZADA Y 
+        MENOS COMERCIAL BRINDANDO ASI MAS CONFIANZA EN LAS EMPRESAS O 
+        PERSONAS QUE CONTRATAN NUESTROS SERVICIOS PORQUE LAS GRANDES 
+        EMPRESAS QUE ACTUALMENTE BRINDAN ESE SERVICIO HAN FALLADO POR 
+        EJEMPLO EN EL DOS MIL QUINCE EL ESCANDALO DE ESPIONAJE POR PARTE DE 
+        GOOGLE A PERSONAS Y EMPRESAS DE LA COMUNIDAD EUROPEA LAS CUALES 
+        REPERCUTIERON TANTO POLITICAMENTE COMO ECONOMICAMENTE ESTE TIPO DE 
+        ACONTECIMIENTOS ABRE PUERTAS PARA PERSONAS COMO NOSOTROS YA QUE LA 
+        DESCONFIANZA DE LAS GRANDES EMPRESAS QUE SE DEDICAN A LA SEGURIDAD 
+        COMPUTACIONAL SE HA PUESTO EN TELA DE JUICIO POR ESO ES IMPORTANTE 
+        QUE DESDE AHORITA COMIENCEN A TRABAJAR LAS PERSONAS QUE ESTAN 
+        INTERESADAS NO SERA FACIL PERO NADA QUE VALGA LA PENA ES FACIL 
+        SALUDOS Y BIENVENIDOS AL CURSO ESPERAMOS QUE LO DISFRUTEN.
         \end{verbatim}
     \end{enumerate}
     
@@ -612,536 +618,664 @@
     \item Dado el siguiente mensaje cifrado con Vinegere.
     \begin{multicols}{4}
     \begin{verbatim}
-        T S I I C H G D E A
-        M W J M Z I P O K R
-        Q V E J M X R Z C Q
-        M O M C L Y A I P L
-        W Z X R F E L S S Y
-        G S A M H X J C G A
-        P C P F J M K J M P
-        A W X U Q R G E S P
-        O W X Q X A V E E N
-        W U O K N Y P K C N
-        S K T Q S I G I Z I
-        V U G B Y W E F G R
-        U C S Z I K M U T W
-        B Z N O K M Q L Z Q
-        Q P L A C M G D S P
-        O J Q W B U K L A A
-        C K U F R V X O O E
-        G X V G K Z U W Q W
-        W D S A M N A Z M G
-        U E F A V V I G S L
-        X A D E K F M X A J
-        Y S Z W P T W E X L
-        N W E X B N T A Y Y
-        I F A T M P X L G S
-        V X Y W E U U X X Z
-        W X E P W N E V M H
-        J E S C Y F C P F J
-        L U G Z L U D L O G
-        Z S P M O A S B E O
-        E K Q V S I O A K O
-        Y W I G O X X D K O
-        W I W U M W J M Z I
-        V Q R C I N T S D Q
-        H A N A V F B Q S M
-        G Q C Q M Q I K A W
-        P I X K W E J P S X
-        R W X G L V E E H F
-        Q G N L Q I P K T I
-        M X L G G S X S F A
-        W X E P Q F E S E G
-        N T A Y S A M N Q M
-        B V U U K O P X A G
-        E C P C N I T D S Q
-        N E U F X A G E F X
-        U K N S D I P B C C
-        X L Z G S X M Z L Z
-        M U E G B P X B K C
-        E S W T I L A W Z W
-        M Q L B T G I V A I
-        G J S U Q B A C B A
-        Q Q G R J Q D B V N
-        D S P Q P E K B I O
-        T G P I I X Q E E M
-        K C L D M R B T C M
-        P L Z Q S G Q P J I
-        D A W X U Q R G E S
-        O B A M R I W U Q M
-        Z I J A F P I B V E
-        R V X O O E F F S N
-        S G E F R A E A F Q
-        W U S G Z P L A S U
-        E Y Z G U Y A Q B H
-        F F S J C A P W C Y
-        T I S K P B G G N V
-        F M P D S E I X K G
-        M X B Z O I F M H L
-        A Y A S Q Z Q P S D
-        C U A W X Q F A O O
-        I K B Q P G P I J W
-        A S Y X T F A V X E
-        G E K Q P I Q D R G
-        V A K N V G H X M N
-        M K J M P T G H M B
-        N W D E I W D R W D
-        M E E U A Q L C P S
-        E O I G L J A W Q Z
-        H M D E I E E M Z E
-        P O K Y Y V I E E J
-        F A G S U D M Q W T
-        Z S A M G L D A W B
-        S D U F O W U H S Z
-        T N E F S Y X R G N
-        S A M N C M M P P M
-        L A V C C G B S E M
-        A L G C Y B D K E F
-        I I T A K K I K U K
-        Q I P K T I T U V B
-        S V Q W M M T T G Y
-        M Q R A M H B T C M
-        S P K W R K A W N C
-        Z M V I I N E K B V
-        K T G E Q B F K C S
-        S D W L J T E E U W
-        O E F L E O M R O J
-        I X T I E Q V L L G
-        Z I P O W T A Q V O
-        O H Q V P W P A D Z
-        I F O K B E O I O U
-        X F B W L S P S I W
-        G D I P M N S A X I
-        U I F E S M W T T S
-        P A Q N D A W N C G
-        Q S I D K D S Z W R
-        O F F V X Z P O W Z
-        C G H W Y S P T G I
-        M K U G D A M X X U
-        W M F X V F O F M R
-        S U W Z E Z Q Q E F
-        B V Q D W E Y I Q D
-        M H B C P H W D S B
-        R U A E I V W E N A
-        M N H A Q V O W R A
-        E J I T C S D E I W
-        U M R B S T O E B M
-        U V W D U R M G M A
-        R T V I E M S Y Z C
-        F M Q C N A V A I I
-        E K O V F B Q R W E
-        R Q O S P S I M E E
-        S L T K C W Z G F I
-        W D U R M U E W Z G
-        Q Y E M W Z I T A D
-        A M U C J U T Z Q Q
-        F E A I R O J A X O
-        E K Y I U Q E A F A
-        A J U Y A E I J G R
-        S Q I F O I G I I I
-        G E T B Z O I L Q E
-        G S L M I P B W D A
-        Z W R A J M Q F K W
-        E Y P T K B J A W B
-        L W Z K R I L E W X
-        M U G M U P I M T M
-        M F V V E J Q W M W
-        W P M A I U E Z M G
-        G I E B E O B K D G
-        B O W N L A G R I N
-        Z S P
-        B A E R A F S O M U
-        M P D C P O K P I I
-        L I G I B A E R A N
-        M B Q M Q R X K K O
-        S Q W S U W E Y M W
-        W E X O I N E S Y S
-        U A E A V L A Q S D
-        K K K O E M W C Q P
-        N P B T Q S S Y S O
-        A T M R A W P A F E
-        K Q R S L S K T G S
-        G R M P T J M R Y C
-        V A T L L G M G E Z
-        G N L Q P B A K G M
-        L B T O W E G O Q V
-        Y I O Q F A Z M E N
-        R G F M Q C N A V A
-        U C Y S Q P E M T R
-        E J W A L W P M G W
-        J M Q X Z E A J M P
-        U I F P M L A G L S
-        L M N H A Q V O W G
-        X M L V Q L W M K O
-        D W X M Q M T A L G
-        T C B W D M K B Q D
-        S Z B C V A A T X H
-        F F I Z Z K O D X S
-        F O W X Q B F K C S
-        F M T R S K W B X T
-        M W L V T R A E E X
-        N V Q R L A Q T J A
-        W N A V A R L X W E
-        W A M C L Y Q F O I
-        L A V F V E O F Y I
-        U I E N S I W I I S
-        P W E I S D Q B R Q
-        M R A W G L K U K R
-        A F P S S Q V E G D
-        A W N E M R B R Q D
-        I P X C N G X I I C
-        G S V X J K N K W C
-        T E D M R X T K S A
-        L V X E J F M A W G
-        M R Q M U D W F I O
-        E K E S K A W S S G
+    T S I I C H G D E A
+    M W J M Z I P O K R
+    Q V E J M X R Z C Q
+    M O M C L Y A I P L
+    W Z X R F E L S S Y
+    G S A M H X J C G A
+    P C P F J M K J M P
+    A W X U Q R G E S P
+    O W X Q X A V E E N
+    W U O K N Y P K C N
+    S K T Q S I G I Z I
+    V U G B Y W E F G R
+    U C S Z I K M U T W
+    B Z N O K M Q L Z Q
+    Q P L A C M G D S P
+    O J Q W B U K L A A
+    C K U F R V X O O E
+    G X V G K Z U W Q W
+    W D S A M N A Z M G
+    U E F A V V I G S L
+    X A D E K F M X A J
+    Y S Z W P T W E X L
+    N W E X B N T A Y Y
+    I F A T M P X L G S
+    V X Y W E U U X X Z
+    W X E P W N E V M H
+    J E S C Y F C P F J
+    L U G Z L U D L O G
+    Z S P M O A S B E O
+    E K Q V S I O A K O
+    Y W I G O X X D K O
+    W I W U M W J M Z I
+    V Q R C I N T S D Q
+    H A N A V F B Q S M
+    G Q C Q M Q I K A W
+    P I X K W E J P S X
+    R W X G L V E E H F
+    Q G N L Q I P K T I
+    M X L G G S X S F A
+    W X E P Q F E S E G
+    N T A Y S A M N Q M
+    B V U U K O P X A G
+    E C P C N I T D S Q
+    X L Z G S X M Z L Z
+    M U E G B P X B K C
+    E S W T I L A W Z W
+    M Q L B T G I V A I
+    G J S U Q B A C B A
+    Q Q G R J Q D B V N
+    D S P Q P E K B I O
+    T G P I I X Q E E M
+    K C L D M R B T C M
+    P L Z Q S G Q P J I
+    D A W X U Q R G E S
+    O B A M R I W U Q M
+    Z I J A F P I B V E
+    R V X O O E F F S N
+    S G E F R A E A F Q
+    W U S G Z P L A S U
+    E Y Z G U Y A Q B H
+    F F S J C A P W C Y
+    T I S K P B G G N V
+    F M P D S E I X K G
+    M X B Z O I F M H L
+    A Y A S Q Z Q P S D
+    C U A W X Q F A O O
+    I K B Q P G P I J W
+    A S Y X T F A V X E
+    G E K Q P I Q D R G
+    V A K N V G H X M N
+    M K J M P T G H M B
+    N W D E I W D R W D
+    M E E U A Q L C P S
+    E O I G L J A W Q Z
+    H M D E I E E M Z E
+    P O K Y Y V I E E J
+    F A G S U D M Q W T
+    Z S A M G L D A W B
+    S D U F O W U H S Z
+    T N E F S Y X R G N
+    S A M N C M M P P M
+    L A V C C G B S E M
+    A L G C Y B D K E F
+    I I T A K K I K U K
+    Q I P K T I T U V B
+    S V Q W M M T T G Y
+    M Q R A M H B T C M
+    S P K W R K A W N C
+    Z M V I I N E K B V
+    K T G E Q B F K C S
+    S D W L J T E E U W
+    O E F L E O M R O J
+    I X T I E Q V L L G
+    Z I P O W T A Q V O
+    O H Q V P W P A D Z
+    I F O K B E O I O U
+    X F B W L S P S I W
+    G D I P M N S A X I
+    U I F E S M W T T S
+    P A Q N D A W N C G
+    Q S I D K D S Z W R
+    O F F V X Z P O W Z
+    C G H W Y S P T G I
+    M K U G D A M X X U
+    W M F X V F O F M R
+    S U W Z E Z Q Q E F
+    B V Q D W E Y I Q D
+    M H B C P H W D S B
+    R U A E I V W E N A
+    M N H A Q V O W R A
+    E J I T C S D E I W
+    U M R B S T O E B M
+    U V W D U R M G M A
+    R T V I E M S Y Z C
+    F M Q C N A V A I I
+    E K O V F B Q R W E
+    R Q O S P S I M E E
+    S L T K C W Z G F I
+    W D U R M U E W Z G
+    Q Y E M W Z I T A D
+    A M U C J U T Z Q Q
+    F E A I R O J A X O
+    E K Y I U Q E A F A
+    A J U Y A E I J G R
+    S Q I F O I G I I I
+    G E T B Z O I L Q E
+    G S L M I P B W D A
+    Z W R A J M Q F K W
+    E Y P T K B J A W B
+    L W Z K R I L E W X
+    M U G M U P I M T M
+    M F V V E J Q W M W
+    W P M A I U E Z M G
+    G I E B E O B K D G
+    B O W N L A G R I N
+    Z S P
+    B A E R A F S O M U
+    M P D C P O K P I I
+    L I G I B A E R A N
+    M B Q M Q R X K K O
+    S Q W S U W E Y M W
+    W E X O I N E S Y S
+    U A E A V L A Q S D
+    K K K O E M W C Q P
+    N P B T Q S S Y S O
+    A T M R A W P A F E
+    K Q R S L S K T G S
+    G R M P T J M R Y C
+    V A T L L G M G E Z
+    G N L Q P B A K G M
+    L B T O W E G O Q V
+    Y I O Q F A Z M E N
+    R G F M Q C N A V A
+    U C Y S Q P E M T R
+    E J W A L W P M G W
+    J M Q X Z E A J M P
+    U I F P M L A G L S
+    L M N H A Q V O W G
+    X M L V Q L W M K O
+    D W X M Q M T A L G
+    T C B W D M K B Q D
+    S Z B C V A A T X H
+    F F I Z Z K O D X S
+    F O W X Q B F K C S
+    F M T R S K W B X T
+    M W L V T R A E E X
+    N V Q R L A Q T J A
+    W N A V A R L X W E
+    W A M C L Y Q F O I
+    L A V F V E O F Y I
+    U I E N S I W I I S
+    P W E I S D Q B R Q
+    M R A W G L K U K R
+    A F P S S Q V E G D
+    A W N E M R B R Q D
+    I P X C N G X I I C
+    G S V X J K N K W C
+    T E D M R X T K S A
+    L V X E J F M A W G
+    M R Q M U D W F I O
+    E K E S K A W S S G
     \end{verbatim}
     \end{multicols}
     
     \begin{enumerate}
-        \item Hacer la prueba de KasisKi describiéndo los pasos para el 
-        mensaje.
+        % Ejercicio 5.a
+        \item Hacer la prueba de KasisKi describiéndo los pasos para el mensaje.
         
         \textsc{Solución}:
-        Lo primero que debemos hacer para decifrar nuestro texto es averiguar la 
-longitud de la cadena. Al momento de hacer análisis sobre el texto nos damos 
-cuenta de algunas palabras con su número de repeticiones y su longitud.\\\\
-Tenemos:\\
-1. 2 cadenas MKJMPTG, una de ellas se encuentra en la posición 245 y la otra en 
-la posición 1050 \\
-2. 2 cadenas PII en las posiciones 77 y 252 \\
-3. 2 cadenas DURM en las posiciones 903 y 1141 \\\\
-Nos percatamos de que el máximo común divisor de 77,245,252,904,1050 y 1141 es 
-7, entonces la longitud de nuestra cadena probablemente sea de 7.\\
-Ahora haremos 7 subcriptogramas, en donde tomaremos el caracter 0 con el 
-7,14...etc y el 1 con el 8, con el 15, etc. asi hasta llegar a 6. A partir de 
-aquí, generaremos los 7 subcriptogramas\\\\
-1. 
-TDBDUFJRALMPMQAQGNAUZQQZSQQZEMDBBE\\YMPMPAAEMDXMXNQENYNAEAMEGMQZLUGPFZ\\MZRFYAEM
-EQMQQDZMMEQAAZYMRFCEFAUK\\MDQDMEAAPAMMQMMFADDPYEXMBQEYPD
-\\XMMSXMXGUQFADXMGOEACMHPFXUDDZXZBAD\\ZKQOAMMEOMZUQAJYFAAQDDYAQAZAAAYQUZG\\NPPSE
-QDXFMMMUQAEMPDXCEAMXEKZXXYQU\\USWOQYQMEDMPMFUXABMFDMBAEGMEZ\\\\
-2. 
-SEPWWSMEWEPIXLIVIMIQIVRXYDVSYHSIEXS\\KIXSVWSRIIWQPPSPSYWSWRSIRSWSGRIVG\\RIVSSTZQ
-FMXPPSPFRGWEQEIEVSYYMGWPHSPS\\GIEEMVXHVQPMSEEMSXQRMVXIIUM
-\\KPYESMVXPMIMEHHVSTYKMSISDESGQSEQUGWVEW\\WWEXDETRWMYEXRRQMIWFVSWEVIIFSIS\\ISYTE
-QGSPIRKIVMQSMSYYWREGIKIISIVPVCP\\WMWRCSHMGMFSWERIIVVGSXZQS\\\\
-3. 
-IAXLBOZSZODIRBILBOPBPOXRQBPQMXPOOOP\\JIFILXPBPKCXLJMBOPXPNAKZIIRKBZBXR\\YKXNPLBL
-RKXBLPLXLOBYBZONXJBIQXQBBBE\\AFXIJGVBLOXXXQJILZLFBLOBKJRL
-\\OXXRYQXXIQIKPVXFZXFJBIZLLILFBPOLRFBSO\\QZLXXEAZLIZVAOLCFQUAOFABIFGKOQII\\XXXBP
-BLAPPARPCZFSXFBPBBPIKRPIAPBIXB\\XMFMXPQBALAXPNOQOPIBRKLLBP\\\\
-4.IMBJAMIWWMCQZTXLAMLAOMKFQVWWWJQIIICM\\XBWAUKTMKQAZIWTWKUACWTIWDKTYIVZMC\\MOCTL
-ZZAUUAAWAVBQUZHQQCOCVQCVWGCUM\\MMKVWWIZMWZAAZIWAWCASMWNBWMVI
-\\LTTZMYZQCTBWAMBBHCMRMZUOWTIFMMCMMXII\\ZIVYDIMQAWIIIWXIAWQMIBMAJVQAWIIWK\\TRZWR
-VMMBWQKCWKQLADTARQIUIXCMKMMJVA\\MVWTCMTIVWAKCBMUBIOIAZZF\\\\
-5. 
-CUKTEUPTORPVCGTGECGCWBKEGNPSGCPFONP\\PQWUQQCCNKPVQUTQUCQQGPQOUKQGWJEPP\\UUOGGGNQ
-EGGKCUSFTVKGSQFKOAQDNGTGPC\\TNPGWAUGONREDJQTUGPUOTNGTQUGQF
-\\GFVCTWGDNCQNKNQCJPPQEKGGDKFKOEPUTTOG\\QTTWKEUQQUPERNWNGTECHQGJGECWUFUIW\\NGOEQ
-ENGWGGTGRWVGAKKWQFTKLCN\\NTUTKUGTVTKNQCUXGGWGKUKCNWNWGKK\\\\
-6. 
-HECERMOIEOOEQIILRLJBTQOLROAUSGE\\OUEFTELASRLMSOOESITSONRNAASBQDRSEAOOT\\CTEHIMOS
-ADNGMSUOOOLUUEAUEPDRAKIN\\HYRADRELESIHAAEAPCILTAOOHNAPVMLA
-\\SAIDAEERABDENERVEFTOEOZNRCOCAESEREA\\LYARIOECNTMOEOAETSEALASLUROQSHOIIE\\ENIIR
-ECSDLNIBAAEGLEBNDEALENTQIGMNU\\STEESIRMEENERIDDNCENESSTC\\\\
-7. 
-GGSEAWKLFJKJMVEIAYSAAMWSJHDWAAKKW\\SJGESEDGDGAEWEGFSSKDGDTFIAMSSVFFFWJ\\SWFWVGKG
-FALMGGWFWJAYWFZFFWWGVZSV\\WSWZSUNWFLFAJJKYSSFSWWUEAWYGWAWT
-\\AVEWLUKGVWWVVKWASJGSFDLWWWWSSUWWS\\KKJEDAGHMJVJWKJJVVSUKFYNMDYLFMDSIESJ\\FGLSW
-HMLAKLLSJFGSGFJEWSKWWGAM\\TMGKKVGJDATAWZJEFKEGWSZKLKSXGS\\\\
-Ahora realizaremos un análisis de frecuencia de cada subcriptograma\\
-1.\\
-A) 31-11\% \\
-B) 7-2\% \\
-C) 3-1\% \\
-D) 20-7\% \\
-E) 22-8\% \\
-F) 12-4\% \\
-G) 7-2\% \\
-H) 1-0.3\% \\
-I) 0-0\% \\
-J) 2-0.7\% \\
-K) 3-1\% \\
-L) 2-0.7\% \\
-M) 41-15\% \\
-N) 5-2\% \\
-O) 4-1\% \\
-P) 12-4\% \\
-Q) 26-10\% \\
-R) 3-1\% \\
-S) 4-1\% \\
-T) 1-0.3\% \\
-U) 13-4\% \\
-V) 0-0\% \\
-W) 1-0.3\% \\
-X) 15-5\% \\
-Y) 11-4\% \\
-Z) 16-6\% \\\\
-2.\\
-A)0-0\% \\
-B)0-0\% \\
-C)2-0.7\% \\
-D)3-1.1\% \\
-E)23-9\% \\
-F)5-2\% \\
-G)11-4\% \\
-H)6-2\% \\
-I)31-11\% \\
-J)0-0\% \\
-K)5-2\% \\
-L)1-0.3\% \\
-M)20-7\% \\
-N)0-0\% \\
-O)0-0\% \\
-P)16-6\% \\
-Q)12-4\% \\
-R)15-5\% \\
-S)39-15\% \\
-T)4-1\% \\
-U)2-0.7\% \\
-V)20-7\% \\
-W)21-8\% \\
-X)12-4\% \\
-Y)11-4\% \\
-Z)2-0.7\% \\\\
-3. \\
-A)31-12\%\\
-B)7-2\%\\
-C)3-1\%\\
-D)20-7\%\\
-E)22-8\%\\
-F)12-4\%\\
-G)7-2\%\\
-H)1-0.3\%\\
-I)0-0\%\\
-J)2-0.7\%\\
-K)3-1\%\\
-L)2-0\%\\
-M)41-15\%\\
-N)5-2\%\\
-O)4-1\%\\
-P)12-4\%\\
-Q)26-10\%\\
-R)3-1\%\\
-S)4-1\%\\
-T)1-0.3\%\\
-U)12-4.5\%\\
-V)0-0\%\\
-W)1-0.3\%\\
-X)15-6\%\\
-Y)11-4\%\\
-Z)16-6\%\\\\
-4.\\
-A)24-9\%\\
-B)11-4\%\\
-C)17-6\%\\
-D)3-1\%\\
-E)0-0\%\\
-F)3-1\%\\
-G)1-0.3\%\\
-H)2-0.7\%\\
-I)28-11\%\\
-J)4-1\%\\
-K)11-4\%\\
-L)5-2\%\\
-M)34-13\%\\
-N)1-0.3\%\\
-O)5-2\%\\
-P)0-0\%\\
-Q)15-5\%\\
-R)4-1\%\\
-S)1-0.3\%\\
-T)14-5\%\\
-U)9-3\%\\
-V)13-5\%\\
-W)31-12\%\\
-X)5-2\%\\
-Y)3-1\%\\
-Z)16-6\%\\\\
-5.\\
-A)3-1\%\\
-B)1-0.3\%\\
-C)18-7\%\\
-D)4-1\%\\
-E)14-5\%\\
-F)8-3\%\\
-G)39-15\%\\
-H)1-0.3\%\\
-I)1-0.3\%\\
-J)4-1\%\\
-K)21-8\%\\
-L)1-0.3\%\\
-M)0-0\%\\
-N)20-7\%\\
-O)10-4\%\\
-P)17-6\%\\
-Q)25-9\%\\
-R)4-1\%\\
-S)3-1\%\\
-T)22-8\%\\
-U)22-8\%\\
-V)6-2\%\\
-W)15-6\%\\
-X)1-0.3\%\\
-Y)0-0\%\\
-Z)0-0\%\\\\
-6.\\
-A)27-10\%\\
-B)5-2\%\\
-C)9-3\%\\
-D)10-3\%\\
-E)42-16\%\\
-F)2-0.7\%\\
-G)4-1\%\\
-H)6-2\%\\
-I)18-6\%\\
-J)1-0.3\%\\
-K)1-0.3\%\\
-L)15-5\%\\
-M)8-3\%\\
-N)16-6\%\\
-O)25-9\%\\
-P)3-1\%\\
-Q)5-1\%\\
-R)18-7\%\\
-S)20-7\%\\
-T)12-4\%\\
-U)8-3\%\\
-V)2-0.7\%\\
-W)0-0\%\\
-X)0-0\%\\
-Y)2-0.7\%\\
-Z)1-0.3\%\\\\
-7.\\
-A)20-7\%\\
-B)0-0\%\\
-C)0-0\%\\
-D)10-4\%\\
-E)13-5\%\\
-F)22-8\%\\
-G)24-9\%\\
-H)3-1\%\\
-I)3-1\%\\
-J)19-7\%\\
-K)20-7\%\\
-L)11-4\%\\
-M)10-4\%\\
-N)2-0.7\%\\
-O)0-0\%\\
-P)0-0\%\\
-Q)0-0\%\\
-R)0-0\%\\
-S)31-12\%\\
-T)4-1\%\\
-U)5-2\%\\
-V)13-5\%\\
-W)38-14\%\\
-X)1-0.3\%\\
-Y)6-2.3\%\\
-Z)5-2\%\\\\
-Realizando un análisis de cada fragmento tenemos que:\\\\
-1)De 1 vemos que la letra con mayor frecuencia es M.\\
-2)De 2 la letra con mayor frecuencia es S, pero MS no tendría mucho sentido, 
-entonces tomamos la vocal con mayor frecuencia, que es E.\\
-3)De 3 la mayor frecuencia sobre una letra se presenta en M.\\
-4)De 4 vemos que la letra con mayor frecuencia es M, pero necesitamos una vocal, 
-y la que tiene mayor frecuencia es I.\\
-5)De 5 observamos que la letra con mayor frecuencia es G.\\
-6)De 6 vemos que la letra con mayor frecuencia es A.\\
-7)De 7 observamos que la letra con mayor frecuencia es W, pero ninguna palabra 
-termina con W, entonces tomamos la segunda, que es S.\\\\
-Observemos como la palabra generada es MEMIGAS, pero eso no tiene mucho sentido, 
-entonces sustituiremos la tercera y quinta letra de la palabra.\\
-Al hacer cambios sobre estas dos letras, descubrimos que la palabra clave es 
-MEXICAS.\\
-¿Por qué la palabra clave no es medidas? Esto se da ya que en la quinta 
-posición, esa misma letra tiene una frecuencia muy baja.\\\\
+        Lo primero que debemos hacer para decifrar nuestro texto es averiguar la
+        longitud de la cadena. Al momento de hacer análisis sobre el texto nos 
+        damos cuenta de algunas palabras con su número de repeticiones y su 
+        longitud. En particular, tenemos que 
+        \begin{itemize}
+            \item Dos cadenas $MKJMPTG$, una de ellas se encuentra en la posición 
+            $245$ y la otra en  la posición $1050$.
+
+            \item Dos cadenas $PII$ en las posiciones $77$ y $252$.
+
+            \item Dos cadenas $DURM$ en las posiciones $903$ y $1141$.
+        \end{itemize}
+        
+        Nos percatamos de que el máximo común divisor de $77, 245, 252, 904, 
+        1050$ y $1141$ es $7$, entonces la longitud de nuestra cadena 
+        probablemente sea de $7$.
+        
+        Ahora haremos $7$ subcriptogramas, en donde tomaremos el caracter $0$ 
+        con el $7, 14, ...$ etc y el $1$ con el $8$, con el $15$, etc. Así, 
+        hasta llegar a $6$. Entonces 
+
+        \begin{verbatim}
+        [1.] TDBDUFJRALMPMQAQGNAUZQQZSQQZEMDBBE
+        YMPMPAAEMDXMXNQENYNAEAMEGMQZLUGPFZ
+        MZRFYAEMEQMQQDZMMEQAAZYMRFCEFAUK
+        MDQDMEAAPAMMQMMFADDPYEXMBQEYPD
+        XMMSXMXGUQFADXMGOEACMHPFXUDDZXZBAD
+        ZKQOAMMEOMZUQAJYFAAQDDYAQAZAAAYQUZG
+        NPPSEQDXFMMMUQAEMPDXCEAMXEKZXXYQU
+        USWOQYQMEDMPMFUXABMFDMBAEGMEZ    
+        \end{verbatim}
+
+        \begin{verbatim}
+        [2.] SEPWWSMEWEPIXLIVIMIQIVRXYDVSYHSIEXS
+        KIXSVWSRIIWQPPSPSYWSWRSIRSWSGRIVG
+        RIVSSTZQFMXPPSPFRGWEQEIEVSYYMGWPHSPS
+        GIEEMVXHVQPMSEEMSXQRMVXIIUM
+        KPYESMVXPMIMEHHVSTYKMSISDESGQSEQUGWVEW
+        WWEXDETRWMYEXRRQMIWFVSWEVIIFSIS
+        ISYTEQGSPIRKIVMQSMSYYWREGIKIISIVPVCP
+        WMWRCSHMGMFSWERIIVVGSXZQS
+        \end{verbatim}
+
+        \begin{verbatim}
+        [3.] IAXLBOZSZODIRBILBOPBPOXRQBPQMXPOOOP
+        JIFILXPBPKCXLJMBOPXPNAKZIIRKBZBXR
+        YKXNPLBLRKXBLPLXLOBYBZONXJBIQXQBBBE
+        AFXIJGVBLOXXXQJILZLFBLOBKJRL
+        OXXRYQXXIQIKPVXFZXFJBIZLLILFBPOLRFBSO
+        QZLXXEAZLIZVAOLCFQUAOFABIFGKOQII
+        XXXBPBLAPPARPCZFSXFBPBBPIKRPIAPBIXB
+        XMFMXPQBALAXPNOQOPIBRKLLBP
+        \end{verbatim}
+
+        \begin{verbatim}
+        [4.] IMBJAMIWWMCQZTXLAMLAOMKFQVWWWJQIIICM
+        XBWAUKTMKQAZIWTWKUACWTIWDKTYIVZMC
+        MOCTLZZAUUAAWAVBQUZHQQCOCVQCVWGCUM
+        MMKVWWIZMWZAAZIWAWCASMWNBWMVI
+        LTTZMYZQCTBWAMBBHCMRMZUOWTIFMMCMMXII
+        ZIVYDIMQAWIIIWXIAWQMIBMAJVQAWIIWK
+        TRZWRVMMBWQKCWKQLADTARQIUIXCMKMMJVA
+        MVWTCMTIVWAKCBMUBIOIAZZF
+        \end{verbatim}
+
+        \begin{verbatim}
+        [5.] CUKTEUPTORPVCGTGECGCWBKEGNPSGCPFONP
+        PQWUQQCCNKPVQUTQUCQQGPQOUKQGWJEPP
+        UUOGGGNQEGGKCUSFTVKGSQFKOAQDNGTGPC
+        TNPGWAUGONREDJQTUGPUOTNGTQUGQF
+        GFVCTWGDNCQNKNQCJPPQEKGGDKFKOEPUTTOG
+        QTTWKEUQQUPERNWNGTECHQGJGECWUFUIW
+        NGOEQENGWGGTGRWVGAKKWQFTKLCN
+        NTUTKUGTVTKNQCUXGGWGKUKCNWNWGKK
+        \end{verbatim}
+
+        \begin{verbatim}
+        [6.] HECERMOIEOOEQIILRLJBTQOLROAUSGE
+        OUEFTELASRLMSOOESITSONRNAASBQDRSEAOOT
+        CTEHIMOSADNGMSUOOOLUUEAUEPDRAKIN
+        HYRADRELESIHAAEAPCILTAOOHNAPVMLA
+        SAIDAEERABDENERVEFTOEOZNRCOCAESEREA
+        LYARIOECNTMOEOAETSEALASLUROQSHOIIE
+        ENIIRECSDLNIBAAEGLEBNDEALENTQIGMNU
+        STEESIRMEENERIDDNCENESSTC
+        \end{verbatim}
+
+        \newpage
+        \begin{verbatim}
+        [7.] GGSEAWKLFJKJMVEIAYSAAMWSJHDWAAKKW
+        SJGESEDGDGAEWEGFSSKDGDTFIAMSSVFFFWJ
+        SWFWVGKGFALMGGWFWJAYWFZFFWWGVZSV
+        WSWZSUNWFLFAJJKYSSFSWWUEAWYGWAWT
+        AVEWLUKGVWWVVKWASJGSFDLWWWWSSUWWS
+        KKJEDAGHMJVJWKJJVVSUKFYNMDYLFMDSIESJ
+        FGLSWHMLAKLLSJFGSGFJEWSKWWGAM
+        TMGKKVGJDATAWZJEFKEGWSZKLKSXGS
+        \end{verbatim}
+        
+        Ahora, realizaremos un análisis de frecuencia de cada subcriptograma:
+        \begin{enumerate}
+            \item Tenemos que
+            \begin{center}
+                \begin{tabular}{|c|c|}
+                \hline
+                A & $31-11\%$ \\ \hline
+                B & $7-2\%$ \\ \hline
+                C & $3-1\%$ \\ \hline
+                D & $20-7\%$ \\ \hline
+                E & $22-8\%$ \\ \hline
+                F & $12-4\%$ \\ \hline
+                G & $7-2\%$ \\ \hline
+                H & $1-0.3\%$ \\ \hline
+                I & $0-0\%$ \\ \hline
+                J & $2-0.7\%$ \\ \hline
+                K & $3-1\%$ \\ \hline
+                L & $2-0.7\%$ \\ \hline
+                M & $41-15\%$ \\ \hline
+                N & $5-2\%$ \\ \hline
+                O & $4-1\%$ \\ \hline
+                P & $12-4\%$\\ \hline
+                Q & $26-10\%$ \\ \hline
+                R & $3-1\%$ \\ \hline
+                S & $4-1\%$ \\ \hline
+                T & $1-0.3\%$ \\ \hline
+                U & $13-4\%$ \\ \hline
+                V & $0-0\%$ \\ \hline
+                W & $1-0.3\%$ \\ \hline
+                X & $15-5\%$ \\ \hline
+                Y & $11-4\%$ \\ \hline
+                Z & $16-6\%$ \\ \hline
+                \end{tabular}
+            \end{center}
+
+            \item Tenemos que
+            \begin{center}
+                \begin{tabular}{|c|c|}
+                \hline
+                A & $0-0\%$ \\ \hline
+                B & $0-0\%$ \\ \hline
+                C & $2-0.7\%$ \\ \hline
+                D & $3-1.1\%$ \\ \hline
+                E & $23-9\%$ \\ \hline
+                F & $5-2\%$ \\ \hline
+                G & $11-4\%$ \\ \hline
+                H & $6-2\%$ \\ \hline
+                I & $31-11\%$ \\ \hline
+                J & $0-0\% $ \\ \hline
+                \end{tabular}
+            \end{center} 
+
+            \begin{center}
+                \begin{tabular}{|c|c|}
+                \hline
+                K & $5-2\%$ \\ \hline
+                L & $1-0.3\%$ \\ \hline
+                M & $20-7\%$ \\ \hline
+                N & $0-0\%$ \\ \hline
+                O & $0-0\%$ \\ \hline
+                P & $16-6\%$\\ \hline
+                Q & $12-4\%$ \\ \hline
+                R & $15-5\%$ \\ \hline
+                S & $39-15\%$ \\ \hline
+                T & $4-1\%$ \\ \hline
+                U & $2-0.7\%$ \\ \hline
+                V & $20-7\%$ \\ \hline
+                W & $21-8\%$ \\ \hline
+                X & $12-4\%$ \\ \hline
+                Y & $11-4\%$ \\ \hline
+                Z & $2-0.7\%$ \\ \hline
+                \end{tabular}
+            \end{center}
+
+            \item Tenemos que
+            \begin{center}
+                \begin{tabular}{|c|c|}
+                \hline
+                A & $31-12\%$ \\ \hline
+                B & $7-2\%$ \\ \hline
+                C & $3-1\%$ \\ \hline
+                D & $20-7\%$ \\ \hline
+                E & $22-8\%$ \\ \hline
+                F & $12-4\%$ \\ \hline
+                G & $7-2\%$ \\ \hline
+                H & $1-0.3\%$ \\ \hline
+                I & $0-0\%$ \\ \hline
+                J & $2-0.7\%$ \\ \hline
+                K & $3-1\%$ \\ \hline
+                L & $2-0\%$ \\ \hline
+                M & $41-15\%$ \\ \hline
+                N & $5-2\%$ \\ \hline
+                O & $4-1\%$ \\ \hline
+                P & $12-4\%$\\ \hline
+                Q & $26-10\%$ \\ \hline
+                R & $3-1\%$ \\ \hline
+                S & $4-1\%$ \\ \hline
+                T & $1-0.3\%$ \\ \hline
+                U & $12-4.5\%$ \\ \hline
+                V & $0-0\%$ \\ \hline
+                W & $1-0.3\%$ \\ \hline
+                X & $15-6\%$ \\ \hline
+                Y & $11-4\%$ \\ \hline
+                Z & $16-6\%$ \\ \hline
+                \end{tabular}
+            \end{center}
+
+            \newpage
+            \item Tenemos que 
+            \begin{center}
+                \begin{tabular}{|c|c|}
+                \hline
+                A & $24-9\%$ \\ \hline
+                B & $11-4\%$ \\ \hline
+                C & $17-6\%$ \\ \hline
+                D & $3-1\%$ \\ \hline
+                E & $0-0\%$ \\ \hline
+                F & $3-1\%$ \\ \hline
+                G & $1-0.3\%$ \\ \hline
+                H & $2-0.7\%$ \\ \hline
+                I & $28-11\%$ \\ \hline
+                J & $4-1\%$ \\ \hline
+                K & $11-4\%$ \\ \hline
+                L & $5-2\%$ \\ \hline
+                M & $34-13\%$ \\ \hline
+                N & $1-0.3\%$ \\ \hline
+                O & $5-2\%$ \\ \hline
+                P & $0-0\%$\\ \hline
+                Q & $15-5\%$ \\ \hline
+                R & $4-1\%$ \\ \hline
+                S & $1-0.3\%$ \\ \hline
+                T & $14-5\%$ \\ \hline
+                U & $9-3\%$ \\ \hline
+                V & $13-5\%$ \\ \hline
+                W & $31-12\%$ \\ \hline
+                X & $5-2\%$ \\ \hline
+                Y & $3-1\%$ \\ \hline
+                Z & $16-6\%$ \\ \hline
+                \end{tabular}
+            \end{center}
+
+            \item Tenemos que 
+            \begin{center}
+                \begin{tabular}{|c|c|}
+                \hline
+                A & $3-1\%$ \\ \hline
+                B & $1-0.3\%$ \\ \hline
+                C & $18-7\%$ \\ \hline
+                D & $4-1\%$ \\ \hline
+                E & $14-5\%$ \\ \hline
+                F & $8-3\%$ \\ \hline
+                G & $39-15\%$ \\ \hline
+                H & $1-0.3\%$ \\ \hline
+                I & $1-0.3\%$ \\ \hline
+                J & $4-1\%$ \\ \hline
+                K & $21-8\%$ \\ \hline
+                L & $1-0.3\%$ \\ \hline
+                M & $0-0\%$ \\ \hline
+                N & $20-7\%$ \\ \hline
+                O & $10-4\%$ \\ \hline
+                P & $17-6\%$\\ \hline
+                Q & $25-9\%$ \\ \hline
+                R & $4-1\%$ \\ \hline
+                S & $3-1\%$ \\ \hline
+                T & $22-8\%$ \\ \hline
+                \end{tabular}
+            \end{center}
+
+            \begin{center}
+                \begin{tabular}{|c|c|}
+                    \hline
+                    U & $22-8\%$ \\ \hline
+                    V & $6-2\%$ \\ \hline
+                    W & $15-6\%$ \\ \hline
+                    X & $1-0.3\%$ \\ \hline
+                    Y & $0-0\%$ \\ \hline
+                    Z & $0-0\%$ \\ \hline
+                \end{tabular}
+            \end{center}
+
+            \item Tenemos que 
+            \begin{center}
+                \begin{tabular}{|c|c|}
+                \hline
+                A & $27-10\%$ \\ \hline
+                B & $5-2\%$ \\ \hline
+                C & $9-3\%$ \\ \hline
+                D & $10-3\%$ \\ \hline
+                E & $42-16\%$ \\ \hline
+                F & $2-0.7\%$ \\ \hline
+                G & $4-1\%$ \\ \hline
+                H & $6-2\%$ \\ \hline
+                I & $18-6\%$ \\ \hline
+                J & $1-0.3\%$ \\ \hline
+                K & $1-0.3\%$ \\ \hline
+                L & $15-5\%$ \\ \hline
+                M & $8-3\%$ \\ \hline
+                N & $16-6\%$ \\ \hline
+                O & $25-9\%$ \\ \hline
+                P & $3-1\%$\\ \hline
+                Q & $5-1\%$ \\ \hline
+                R & $18-7\%$ \\ \hline
+                S & $20-7\%$ \\ \hline
+                T & $12-4\%$ \\ \hline
+                U & $8-3\%$ \\ \hline
+                V & $2-0.7\%$ \\ \hline
+                W & $0-0\%$ \\ \hline
+                X & $0-0\%$ \\ \hline
+                Y & $2-0.7\%$ \\ \hline
+                Z & $1-0.3\%$ \\ \hline
+                \end{tabular}
+            \end{center}
+            
+            \item Tenemos que 
+            \begin{center}
+                \begin{tabular}{|c|c|}
+                \hline
+                A & $20-7\%$ \\ \hline
+                B & $0-0\%$ \\ \hline
+                C & $0-0\%$ \\ \hline
+                D & $10-4\%$ \\ \hline
+                E & $13-5\%$ \\ \hline
+                F & $22-8\%$ \\ \hline
+                G & $24-9\%$ \\ \hline
+                H & $3-1\%$ \\ \hline
+                I & $3-1\%$ \\ \hline
+                J & $19-7\%$ \\ \hline
+                K & $20-7\%$ \\ \hline
+                L & $11-4\%$ \\ \hline
+                M & $10-4\%$ \\ \hline
+                N & $2-0.7\%$ \\ \hline
+                \end{tabular}
+            \end{center}
+
+            \begin{center}
+                \begin{tabular}{|c|c|}
+                    \hline
+                    O & $0-0\%$ \\ \hline
+                    P & $0-0\%$\\ \hline
+                    Q & $0-0\%$ \\ \hline
+                    R & $0-0\%$ \\ \hline
+                    S & $31-12\%$ \\ \hline
+                    T & $4-1\%$ \\ \hline
+                    U & $5-2\%$ \\ \hline
+                    V & $13-5\%$ \\ \hline
+                    W & $38-14\%$ \\ \hline
+                    X & $1-0.3\%$ \\ \hline
+                    Y & $6-2.3\%$ \\ \hline
+                    Z & $5-2\%$ \\ \hline
+                \end{tabular}
+            \end{center}
+        \end{enumerate}
+
+        Realizando un análisis de cada fragmento obtenemos:
+        \begin{itemize}
+            \item De 1, vemos que la letra con mayor frecuencia es M.
+
+            \item De 2, la letra con mayor frecuencia es S, pero MS no tendía 
+            mucho sentido, entonces tomamos la vocal con mayor frecuencia, que 
+            es E.
+
+            \item De 3, la mayor frecuencia sobre una letra se presenta en M.
+            
+            \item De 4, vemos que la letra con mayor frecuencia es M, pero 
+            necesitamos una vocal, y la que tiene mayor frecuencia es I.
+
+            \item De 5, observamos que la letra con mayor frecuencia es G.
+
+            \item De 6, vemos que la letra con mayor frecuencia es A.
+
+            \item De 7, obervamos que la letra con mayor frecuencia es W, pero 
+            ninguna palabra termina con W, entonces tomamos la segunda, que es 
+            S.
+        \end{itemize}
+        
+        Observemos como la palabra generada es MEMIGAS, pero eso no tiene mucho 
+        sentido, entonces sustituiremos la tercera y quinta letra de la palabra.
+        Al hacer cambios sobre estas dos letras, descubrimos que la palabra clave 
+        es MEXICAS.
+        
+        ¿Por qué la palabra clave no es medidas? Esto se da ya que en la quinta
+        posición, esa misma letra tiene una frecuencia muy baja.
+
+        % Ejercicio 5.b
         \item Dar la clave de cifrado.
         
         \textsc{Solución:} MEXICAS.
         
+        % Ejercicio 5.c
         \item Descifrar el mensaje.
         
         \textsc{Solución:}
         \begin{verbatim}
-            HOLA AHORA DESEO PLATICAR SOBRE MIS ESCRITORES MEXICANOS FAVORITOS 
-            COMENZARE POR ALGUNOS DE LITERATURA QUE HE LEIDO EL PRIMERO DEL QUE 
-            ESCRIBIRE ALGO ES DE JAIME SABINES GUTIERREZ QUE NACIO EN TUXCLA    
-            GUTIERREZ EN LO PERSONAL NO TOQUE SU POESIA DABA GIROS INESPERADOS 
-            PARA MUESTRA LEAMOS UN FRAGMENTO DEL POEMA TITULADO LOS AMOROSOS 
-            LOS AMOROSOS CALLAN EL AMOR ES EL SILENCIO MAS FINO EL MAS 
-            TEMBLOROSO EL MAS INSOPORTABLE LOS AMOROSOS BUSCAN LOS AMOROSOS SON 
-            LOS QUE ABANDONAN SON OS QUE CAMBIAN LOS QUE OLVIDAN SU CORAZON LES 
-            DICE QUE NUNCA HAN DE ENCONTRAR NO ENCUENTRAN BUSCAN EN ESTE 
-            FRAGMENTO QUE HEMOS LEIDO PODEMOS VERLOS AMOROSOS BUSCAN E   
-            INMEDIATAMENTE LE SIGUE LOS AMOROSOS SON LOS QUE ABANDONAN OTRO 
-            ESCRITOR ES EMILIO ABREU GOMEZ QUE NACIO EN MERIDA HE AQUI UN     
-            FRAGMENTO MUY PEQUENO DE SU LIBRO TITULADO CANEK HISTORIA Y 
-            LEYENDA DE UN HEROE MAYA EL HERRERO DE LA HACIENDA SE ACERCO AL 
-            NUEVO AMO Y LE DIJO SENOR YA ESTA TERMINADO EL HIERRO PARA MARCAR 
-            A LAS BESTIAS HAGO OTRO PARA MARCAR A LOS INDIOS  EL AMO CONTESTO    
-            USA EL MISMO CANEK ROMPIO EL HIERRO. EN ESTE FRAGMENTO PODEMOS  
-            VER QUE EMILIO NO LE AGRADABA LA DESIGUALDAD LA ULTIMA OBRA 
-            DE LITERATURA QUE CITARE ES EL LIBRO TITULADO EL LABERINTO DE LA 
-            SOLEDAD Y SIN DUDA EL ESCRITOR ES OCTAVIO PAZ HE AQUI UN 
-            FRAGMENTO VIEJO O ADOLECENTE CRIOLLO O MEZTIZO GENERAL OBRERO O     
-            LICENCIADO EL MEXICANO SE ME APARECE COMO UN SER QUE SE ENCIERRA Y 
-            SE PRESERVA MASCARA EL ROSTRO Y MASCARA LA SONRISA AQUI OCTAVIO PAZ 
-            HACE UNA DESCRIPCION DE NOSOTROS LOS MEXICANOS MUY ACERTADA POR 
-            OTRO LADO NO PUEDEN FALTAR MIS ESCRITORES MEXICANOS DE ALGEBRA 
-            FAVORITOS UNO DE ELLOS ES HUGO ALBERTO RINCON MEJIA QUE EN SUS 
-            LIBROS HA NOTADO QUE LA SIMBOLOGIA DE ACUERDO AL LENGUAJE NOS 
-            PERMITE ASOCIAR MEJOR EL CONCEPTO DEL CUAL SE ESTA ESTUDIANDO EL 
-            SIGUIENTE ESCRITOR FUE BASICO PARA MI CUANDO VI TEORIA DE GALOIS
-            Y LO QUE VI EN SUS LIBROS ES UN MANEJO DE LAS IDEAS CLARAS Y EN 
-            MI LENGUAJE EL ESPANOL. EL ULTIMO DEL QUE ESCRIBIRE ES GUILLERMO 
-            GRABINSKY EN SUS CLASES DESPERTO MI INTERES POR EL ANALISIS Y
-            SU LIBRO TEORIA DE LA MEDIDA SE HA CONVERTIDO EN MI BASE EN LOS  
-            CURSOS QUE IMPARTIDO ANTES DE TERMINAR ESTA CHARLA LES PREGUNTO 
-            CUALES SON SUS AUTORES FAVORITOS MEXICANOS.
+        HOLA AHORA DESEO PLATICAR SOBRE MIS ESCRITORES MEXICANOS FAVORITOS 
+        COMENZARE POR ALGUNOS DE LITERATURA QUE HE LEIDO EL PRIMERO DEL QUE 
+        ESCRIBIRE ALGO ES DE JAIME SABINES GUTIERREZ QUE NACIO EN TUXCLA    
+        GUTIERREZ EN LO PERSONAL NO TOQUE SU POESIA DABA GIROS INESPERADOS 
+        PARA MUESTRA LEAMOS UN FRAGMENTO DEL POEMA TITULADO LOS AMOROSOS 
+        LOS AMOROSOS CALLAN EL AMOR ES EL SILENCIO MAS FINO EL MAS 
+        TEMBLOROSO EL MAS INSOPORTABLE LOS AMOROSOS BUSCAN LOS AMOROSOS SON 
+        LOS QUE ABANDONAN SON OS QUE CAMBIAN LOS QUE OLVIDAN SU CORAZON LES 
+        DICE QUE NUNCA HAN DE ENCONTRAR NO ENCUENTRAN BUSCAN EN ESTE 
+        FRAGMENTO QUE HEMOS LEIDO PODEMOS VERLOS AMOROSOS BUSCAN E   
+        INMEDIATAMENTE LE SIGUE LOS AMOROSOS SON LOS QUE ABANDONAN OTRO 
+        ESCRITOR ES EMILIO ABREU GOMEZ QUE NACIO EN MERIDA HE AQUI UN     
+        FRAGMENTO MUY PEQUENO DE SU LIBRO TITULADO CANEK HISTORIA Y 
+        LEYENDA DE UN HEROE MAYA EL HERRERO DE LA HACIENDA SE ACERCO AL 
+        NUEVO AMO Y LE DIJO SENOR YA ESTA TERMINADO EL HIERRO PARA MARCAR 
+        A LAS BESTIAS HAGO OTRO PARA MARCAR A LOS INDIOS  EL AMO CONTESTO    
+        USA EL MISMO CANEK ROMPIO EL HIERRO. EN ESTE FRAGMENTO PODEMOS  
+        VER QUE EMILIO NO LE AGRADABA LA DESIGUALDAD LA ULTIMA OBRA 
+        DE LITERATURA QUE CITARE ES EL LIBRO TITULADO EL LABERINTO DE LA 
+        SOLEDAD Y SIN DUDA EL ESCRITOR ES OCTAVIO PAZ HE AQUI UN 
+        FRAGMENTO VIEJO O ADOLECENTE CRIOLLO O MEZTIZO GENERAL OBRERO O     
+        LICENCIADO EL MEXICANO SE ME APARECE COMO UN SER QUE SE ENCIERRA Y 
+        SE PRESERVA MASCARA EL ROSTRO Y MASCARA LA SONRISA AQUI OCTAVIO PAZ 
+        HACE UNA DESCRIPCION DE NOSOTROS LOS MEXICANOS MUY ACERTADA POR 
+        OTRO LADO NO PUEDEN FALTAR MIS ESCRITORES MEXICANOS DE ALGEBRA 
+        FAVORITOS UNO DE ELLOS ES HUGO ALBERTO RINCON MEJIA QUE EN SUS 
+        LIBROS HA NOTADO QUE LA SIMBOLOGIA DE ACUERDO AL LENGUAJE NOS 
+        PERMITE ASOCIAR MEJOR EL CONCEPTO DEL CUAL SE ESTA ESTUDIANDO EL 
+        SIGUIENTE ESCRITOR FUE BASICO PARA MI CUANDO VI TEORIA DE GALOIS
+        Y LO QUE VI EN SUS LIBROS ES UN MANEJO DE LAS IDEAS CLARAS Y EN 
+        MI LENGUAJE EL ESPANOL. EL ULTIMO DEL QUE ESCRIBIRE ES GUILLERMO 
+        GRABINSKY EN SUS CLASES DESPERTO MI INTERES POR EL ANALISIS Y
+        SU LIBRO TEORIA DE LA MEDIDA SE HA CONVERTIDO EN MI BASE EN LOS  
+        CURSOS QUE IMPARTIDO ANTES DE TERMINAR ESTA CHARLA LES PREGUNTO 
+        CUALES SON SUS AUTORES FAVORITOS MEXICANOS.
         \end{verbatim}
-
     \end{enumerate}
     
     % Ejercicio 6.
     \item Dado el siguiente mensaje cifrado con Hill, del cual se tiene que 
-    \begin{verbatim}
+    \begin{center}
         IQ SU NF WI FE IY IK CC KO IG UV
-    \end{verbatim}
+    \end{center}
     
     proviene de 
-    \begin{verbatim}
+    \begin{center}
         Como ho ye nd ia es mu yc om un
-    \end{verbatim}
+    \end{center}
     
     \begin{verbatim}
-        IQ SU BX EW AF NB CN OD IU BV CG YI OD NF WI FE IY IK CC KO IG UV VD
-        NB RY BZ EZ YI EL UQ WR IY DG MR NU YY RZ MK KT OH SF AB MW OI ZU
-        SF US IB EY AO XI CN LB DN EZ CN OT KY XI CA LB XO NB KY LP WD OI YU
-        HV OM NN AP EM CC KO LH RZ FL IK LH FP IM HJ AN SO MV VD LB CC SL
-        OQ DF IK RG MU YB PN RZ LH WA SG QK EZ RT KT SO PN WK LH LP EZ RT
-        YM RR TX KT AN UV WC BX UQ IO VL GS CG OE DF LH NH XJ BX EJ GM BU
-        AN DF IK RG KS XI CN IK MN QS VC CO SE SW IK IL RT RM OH TX YM RG SO
-        YM SU GV SO GO WD QG AP CO SO GO OH AN ZP BX QQ UQ SO SC ZR VX UN
-        PN SF RT MK GO EZ SO IL RT PN SC VD FS AK UI LU SO DJ UV PT TX RZ MK
-        CC KO LH XJ BX RR GO KJ YG CG SU QQ BG WP AP QS CX WD IK GO UR AN
-        BX YI ZL JT IK TF PN ZH GM ZH IY KT SF MU IG FL TF YI OD YU HV ZE AN
-        TX TF JT GO CA CX WC JC CJ GC RZ DJ VD BU GH SO LH JT EJ SW EW OD
-        RR SC VL ZH IK RT CT CJ YY US SO NF KB PN QQ XI IK LH EW IG FL TF JT
-        RZ WA OD VH FE UQ EZ TF JV QQ LB ZA SO HV YU VL ZH IK EZ XF YL QG
-        TX RR CU MU IG AK PN YB RT LH KT YC AN CN GX OI RR CU CG VD LP GH
-        SF MU OI ZH IG FL TF YI OD OT PT RZ ZL QQ TX KT QT XJ RT IL EY GO IK
-        OD YG SR EY PT RZ DF AB SO KY ZL CG KY XI SO ME FX GH SR GH SF EG
-        TX MK PT RZ ZL QQ TX BX VL SY NN IH OG TF SH GM NN VL ZH IK EZ BR
-        OE CG IQ LB FX GH SF SR GH IX EZ IG EZ SO BR OE IQ GI EY UF GH CN IK
-        JX ZL YB RR GI IQ YR PN FE CN RR EJ GH NB UQ SO KY ZH OI NN LP GC HV
-        SC PN EY JT FE IK EM DM US OT MU YB PN RZ GO UR AN SF OU AP CW OT
-        MC CO VD BU AN RT GO WD KJ EZ NH RL YB EZ IK RT SU KY XI ME EW UI
-        PF CN EY YG SG QK EZ RT PT YM
+    IQ SU BX EW AF NB CN OD IU BV CG YI OD NF WI FE IY IK CC KO IG UV VD
+    NB RY BZ EZ YI EL UQ WR IY DG MR NU YY RZ MK KT OH SF AB MW OI ZU
+    SF US IB EY AO XI CN LB DN EZ CN OT KY XI CA LB XO NB KY LP WD OI YU
+    HV OM NN AP EM CC KO LH RZ FL IK LH FP IM HJ AN SO MV VD LB CC SL
+    OQ DF IK RG MU YB PN RZ LH WA SG QK EZ RT KT SO PN WK LH LP EZ RT
+    YM RR TX KT AN UV WC BX UQ IO VL GS CG OE DF LH NH XJ BX EJ GM BU
+    AN DF IK RG KS XI CN IK MN QS VC CO SE SW IK IL RT RM OH TX YM RG SO
+    YM SU GV SO GO WD QG AP CO SO GO OH AN ZP BX QQ UQ SO SC ZR VX UN
+    PN SF RT MK GO EZ SO IL RT PN SC VD FS AK UI LU SO DJ UV PT TX RZ MK
+    CC KO LH XJ BX RR GO KJ YG CG SU QQ BG WP AP QS CX WD IK GO UR AN
+    BX YI ZL JT IK TF PN ZH GM ZH IY KT SF MU IG FL TF YI OD YU HV ZE AN
+    TX TF JT GO CA CX WC JC CJ GC RZ DJ VD BU GH SO LH JT EJ SW EW OD
+    RR SC VL ZH IK RT CT CJ YY US SO NF KB PN QQ XI IK LH EW IG FL TF JT
+    RZ WA OD VH FE UQ EZ TF JV QQ LB ZA SO HV YU VL ZH IK EZ XF YL QG
+    TX RR CU MU IG AK PN YB RT LH KT YC AN CN GX OI RR CU CG VD LP GH
+    SF MU OI ZH IG FL TF YI OD OT PT RZ ZL QQ TX KT QT XJ RT IL EY GO IK
+    OD YG SR EY PT RZ DF AB SO KY ZL CG KY XI SO ME FX GH SR GH SF EG
+    TX MK PT RZ ZL QQ TX BX VL SY NN IH OG TF SH GM NN VL ZH IK EZ BR
+    OE CG IQ LB FX GH SF SR GH IX EZ IG EZ SO BR OE IQ GI EY UF GH CN IK
+    JX ZL YB RR GI IQ YR PN FE CN RR EJ GH NB UQ SO KY ZH OI NN LP GC HV
+    SC PN EY JT FE IK EM DM US OT MU YB PN RZ GO UR AN SF OU AP CW OT
+    MC CO VD BU AN RT GO WD KJ EZ NH RL YB EZ IK RT SU KY XI ME EW UI
+    PF CN EY YG SG QK EZ RT PT YM
     \end{verbatim}
     
     \begin{enumerate}
+        % Ejercicio 6.a
         \item Encontrar la matriz de cifrado planteando con cuáles congruencias
         se obtiene.
         
@@ -1294,13 +1428,13 @@ posición, esa misma letra tiene una frecuencia muy baja.\\\\
             \begin{bmatrix} 14 & 19 \\ 3 & 23\end{bmatrix} 
         \end{equation*}
 
-
+        % Ejercicio 6.b
         \item Calcular la matriz inversa paso a paso.
         
         \textsc{Solución:} Primero, calculamos el determinante de nuestra 
         matriz.
         \begin{align*}
-            det(\begin{bmatrix} 14 & -3 \\ -19 & 23\end{bmatrix}) 
+            \det \left(\begin{bmatrix} 14 & -3 \\ -19 & 23\end{bmatrix}\right)
             &= 23 \cdot 14 - (-19 \cdot -3) \\
             &= 322 - 57 \\
             &= 265
@@ -1308,12 +1442,11 @@ posición, esa misma letra tiene una frecuencia muy baja.\\\\
         
         Luego, calculamos la matriz adjunta
         \begin{align*}
-            Ad(\begin{bmatrix} 14 & -3 \\ -19 & 23\end{bmatrix}) 
-            &= (\begin{bmatrix} 23 & -3 \\ -19 & 14\end{bmatrix})
+            Ad \left(\begin{bmatrix} 14 & -3 \\ -19 & 23\end{bmatrix}\right)
+            &= \begin{bmatrix} 23 & -3 \\ -19 & 14\end{bmatrix}
         \end{align*}
         
         Por lo tanto, la matriz inversa es igual a 
-
 
         \begin{align*}
             \begin{bmatrix} 14 & 19 \\ 3 & 23\end{bmatrix} 
@@ -1321,32 +1454,32 @@ posición, esa misma letra tiene una frecuencia muy baja.\\\\
             &= \begin{bmatrix} 15 & 17 \\ 15 & 8 \end{bmatrix} \pmod{26}
         \end{align*}
         
+        % Ejercicio 6.c
         \item Descifrar el mensaje.
         
         \textsc{Solución:} Utilizamos el código de nuestro proyecto 1 para
         poder descifrar el mensaje. 
         \begin{verbatim}
-            Como descubrieron su vocacion hoy en dia es muy comun por
-            influencia familiar por programas de television peliculas e 
-            internet generalmente en el primer medio ya hay una idea muy clara 
-            pues la familia nos expone mucho a nuestra carrera las siguientes 
-            dos regularmente solo nos dan una idea muy vaga casi nula pero 
-            despiertan nuestro interes y la ultima que es internet nosotros  
-            somos los que decidimos que tanto deseamos saber sobre el tema que 
-            nos interesa por lo cual nos da un panorama muy claro de lo que 
-            buscamos en la vida usted es que han decidido estar en ciencias de 
-            la computacion ya habran notado que esta involucrada por todos 
-            lados pues con los avances tecnologicos hoy presentes las     
-            computadoras son fundamentales en ellos hay avances en 
-            biotecnologia como crear telas de manera biologica por modelacion 
-            computacional para disenos de proteinas que son usadas para 
-            nuevos medicamentos o el modelo del genoma para diseno de vacunas 
-            hay tambien avances en fisica con el modelado de fenomenos fisicos 
-            y asi poder estudiarlos y comprenderlos podriamos mencionar muchas 
-            areas donde se aplica la carrera que han elegido y algo importante 
-            que deben pensar en este momento es cual sera su siguiente paso.
+        COMO DESCUBRIERON SU VOCACION HOY EN DIA ES MUY COMUN POR 
+        INFLUENCIA FAMILIAR POR PROGRAMAS DE TELEVISION PELICULAS E 
+        INTERNET GENERALMENTE EN EL PRIMER MEDIO YA HAY UNA IDEA MUY CLARA 
+        PUES LA FAMILIA NOS EXPONE MUCHO A NUESTRA CARRERA LAS SIGUIENTES 
+        DOS REGULARMENTE SOLO NOS DAN UNA IDEA MUY VAGA CASI NULA PERO    
+        DESPIERTAN NUESTRO INTERES Y LA ULTIMA QUE ES INTERNET NOSOTROS 
+        SOMOS LOS QUE DECIDIMOS QUE TANTO DESEAMOS SABER SOBRE EL TEMA QUE 
+        NOS INTERESA POR LO CUAL NOS DA UN PANORAMA MUY CLARO DE LO QUE       
+        BUSCAMOS EN LA VIDA USTED ES QUE HAN DECIDIDO ESTAR EN CIENCIAS DE 
+        LA COMPUTACION YA HABRAN NOTADO QUE ESTA INVOLUCRADA POR TODOS 
+        LADOS PUES CON LOS AVANCES TECNOLOGICOS HOY PRESENTES LAS 
+        COMPUTADORAS SON FUNDAMENTALES EN ELLOS HAY AVANCES EN 
+        BIOTECNOLOGIA COMO CREAR TELAS DE MANERA BIOLOGICA POR MODELACION 
+        COMPUTACIONAL PARA DISENOS DE PROTEINAS QUE SON USADAS PARA 
+        NUEVOS MEDICAMENTOS O EL MODELO DEL GENOMA PARA DISENO DE VACUNAS 
+        HAY TAMBIEN AVANCES EN FISICA CON EL MODELADO DE FENOMENOS FISICOS 
+        Y ASI PODER ESTUDIARLOS Y COMPRENDERLOS PODRIAMOS MENCIONAR MUCHAS 
+        AREAS DONDE SE APLICA LA CARRERA QUE HAN ELEGIDO Y ALGO IMPORTANTE 
+        QUE DEBEN PENSAR EN ESTE MOMENTO ES CUAL SERA SU SIGUIENTE PASO.
         \end{verbatim}
     \end{enumerate}
-
 \end{enumerate}
 \end{document}
