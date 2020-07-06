@@ -18,6 +18,6 @@ A lo largo de este curso se realizarón
 * Proyectos
   * Proyecto 1: Cifrado de Hill
   * Proyecto 2: Criptosistema RSA
-  * Proyecto 3: Factorización de curvas elípticas de Lenstra.
+  * Proyecto 3: Factorización de curvas elípticas de Lenstra
 
 
