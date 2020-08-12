@@ -401,10 +401,47 @@
     \begin{enumerate}
         % Ejercicio 3.a
         \item ¿Es $Q = (81, -176)$ un punto de $\mathbb{E}$?
+        
+        \textsc{Solución:} Para saber si $Q$ es un punto en $E$ simplemente 
+        debemos comprobar que con los valores $x = 81$ y $y = -176$ se cumple
+        la congruencia 
+        \begin{equation*}
+            y^2 - 2 \equiv x^3 + 333x \pmod{347}
+        \end{equation*}
+        
+        Entonces
+        \begin{align*}
+            y^2 - 2 &\equiv x^3 + 333x \pmod{347} \\
+            (-176)^2 - 2 &\equiv (81)^3 + 333(81) \pmod{347} \\
+            30 974 &\equiv 558 414 \pmod{347} \\ 
+        \end{align*}
+        
+        Como $p = 347 \; | \; 558414 - 30974 = 527 440$ ya que 
+        $347(1520) = 527 440$, entonces podemos concluir que 
+        $Q = (81, -176) \in E(F_{347})$.
+
         % Ejercicio 3.b
         \item Si sabemos que $|\mathbb{E}| = 358$. ¿Podemos decir que 
         $\mathbb{E}$ es criptográficamente útil? ¿Cuál es el órden de $P$? 
         ¿Entre qué valores se puede escoger la clave privada?
+
+        \textsc{Solución:} Como $|E| = 358 = 2 \cdot 179$ entonces se puede
+        decir que $E$ no es criptográficamente útil ya que una 
+        \textit{curva fuerte} busca que 
+        \begin{itemize}
+            \item El órden de $E$ sea divisible por un primo grande ($2$ no lo 
+            es), ó 
+            \item El órden de $E$ sea un primo grande (tenemos que $358$ es par).
+        \end{itemize}
+      
+        Utilizando la función \texttt{orden()}, definida en el ejercicio 
+        \textit{2.c}, obtenemos que el órden del elemento $P = (110, 136)$ es
+        $179$. 
+        
+        Los valores de la clave privada se pueden escoger entre los enteros
+        del intervalo $[1, 179]$, el cual está acotado por el órden del punto 
+        $P$ (ya que es el punto primitivo).
+
         % Ejercicio 3.c
         \item Si tu clave privada es $k = 101$ y algún conocido te ha enviado 
         el mensaje cifrado
@@ -413,6 +450,28 @@
         \end{equation*}
 
         ¿Cuál era el mensaje original?
+
+        \textsc{Solución:} El mensaje está cifrado usando \textit{ElGamal 
+        elíptico}, por lo que simplemente hay que seguir su algoritmo para
+        descifrar.
+        \begin{itemize}
+            \item Calculamos $M = M_2 - kM_1$, donde $k$ es nuestra llave 
+            privada. 
+            
+            Usando la función \texttt{suma\_puntos()}, implementada en el
+            ejercicio \textit{2.c}, obtenemos que 
+            \begin{align*}
+                M
+                &= (135, 214) - 101(232, 278) \\ 
+                &= (135, 214) - (275, 176) \\
+                &= (135, 214) + (275, -176) 
+                && \text{por definición de $-P$} \\ 
+                &= (74, 87)
+            \end{align*}
+        \end{itemize}
+        
+        Por lo tanto, el mensaje original es $M = (74, 87)$.
+
     \end{enumerate}
 
     % Ejercicio 4.
