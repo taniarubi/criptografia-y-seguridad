@@ -77,11 +77,322 @@
     \begin{enumerate}
         % Ejercicio 2.a
         \item Calcula y muestra el número de puntos de $\mathbb{E}$.
+        
+        \textsc{Solución:} Sabemos que los puntos en una curva elíptica 
+        \begin{equation*}
+            E : y^2 = x^3 + Ax + B \pmod{n}
+        \end{equation*}
+        
+        son los pares $(x, y) \pmod{n}$ con $x, y \in K$ tales que satisfacen
+        la ecuación anterior, junto con el punto en el infinito. 
+        
+        Dada la siguiente implementación
+        \begin{lstlisting}[language = Python]
+        '''
+        Regresa los puntos que pertenecen a la curva eliptica 
+        E: y^2 = x^3 + Ax + B (mod n)
+        '''
+        def encontrar_puntos(A, B, n):
+            puntos = []
+            # Sabemos que x pertenece al conjunto [0, 70].
+            for i in range (0, n):
+                # Sabemos que y pertenece al conjunto [0, 70]. 
+                for j in range (0, n):
+                    # Encontramos el valor de x^3 + Ax + B (mod n)
+                    valor = (pow(i, 3, n) + ((A * i) % n) + B) % n
+                    # Encontramos los posibles valores para y.
+                    y2 = pow(j, 2)
+                    # Verificamos que el par satisface la ecuacion.
+                    if (((y2 - valor) % n) == 0):
+                        puntos.append((i, j))
+            
+            print("La curva eliptica E tiene " + str(len(puntos) + 1) + 
+                  " puntos.")
+            return puntos
+            
+        if __name__ == "__main__":
+            print(encontrar_puntos(1, 28, 71))
+        \end{lstlisting}
+        
+        obtenemos que, junto con el punto en el infinito, hay $72$ puntos
+        en la curva elíptica, los cuales son:
+        
+        \begin{center}
+        \begin{tabular}{c|c|c|c|c|c|c|c|c}
+        (1, 32) & (1, 39) & (2, 31) & (2, 40) & (3, 22) & (3, 49) & (4, 5) & 
+        (4, 66) & (5, 4) \\ \hline
+        (5, 67) & (6, 26) & (6, 45) & (12, 8) & (12, 63) & (13, 26) & 
+        (13, 45) & (15, 9) & (15, 62) \\ \hline
+        (19, 27) & (19, 44) & (20, 5) & (20, 66) & (21, 3) & (21, 68) & 
+        (22, 30) & (22, 41) & (23, 19) \\ \hline
+        (23, 52) & (25, 22) & (25, 49) & (27, 0) & (31, 32) & (31, 39) & 
+        (33, 1) & (33, 70) & (34, 23) \\ \hline
+        (34, 48) & (35, 14) & (35, 57) & (36, 12) & (36, 59) & (37, 33) & 
+        (37, 38) & (39, 32) & (39, 39) \\ \hline
+        (41, 7) & (41, 64) & (43, 22) & (43, 49) & (47, 5) & (47, 66) & 
+        (48, 11) & (48, 60) & (49, 24) \\ \hline
+        (49, 47) & (52, 26) & (52, 45) & (53, 0) & (58, 27) & (58, 44) & 
+        (61, 15) & (61, 56) & (62, 0) \\ \hline
+        (63, 17) & (63, 54) & (65, 27) & (65, 44) & (66, 18) & (66, 53) & 
+        (69, 35) & (69, 36) & $\infty$ \\
+        \end{tabular}
+        \end{center}
+
         % Ejercicio 2.b
         \item Muestra que $\mathbb{E}$ no es un grupo cíclico.
+
+        \begin{proof}
+            Sabemos que un elemento $P \in E$ es un punto primitivo si genera 
+            a todo el conjunto de puntos que pertenecen a $E$, es decir, todos
+            los elementos del grupo pueden ser expresados de la forma
+            \begin{equation*}
+                P + P + \cdots + P (\text{$k$ veces}) \; \; \; \; \; 
+                \text{para alguna $k \in \{1, 2, ..., \#E(\mathbb{F}_q)\}$}
+            \end{equation*}
+            
+            Por un corolario del teorema de \textit{Lagrange} sabemos que el órden
+            de un subgrupo generado por un elemento en $E$ necesariamente divide 
+            a $\#E(\mathbb{F}_q) = 72$, por lo que 
+            \begin{equation*}
+                D = \{1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36\}
+            \end{equation*}
+            
+            son los posibles valores para el órden de cada uno de los puntos en 
+            $E(\mathbb{F}_{71})$, ya que son justamente todos los divisores de 
+            $72$. 
+            
+            Por el ejercicio \textit{2.c} sabemos que el órden de cada uno de los
+            elementos en $E$ se encuentra dentro del conjunto
+            \begin{equation*}
+                O = \{1, 2, 3, 4, 6, 9, 12, 18, 36\}
+            \end{equation*}
+            
+            Entonces, como 
+            \begin{equation*}
+                \#E(\mathbb{F}_{71}) = n = 72 = 2^3 \cdot 3^2
+            \end{equation*}
+            
+            no es primo, podemos buscar al punto primitivo $P$ de la siguiente
+            forma: para cada primo $p$ que divide a 72, calculamos
+            $(\frac{n}{p})P$. Si ninguno de estos puntos es el punto en el
+            infinito, entonces $P$ genera a $E$. Por ejemplo, si $P = (1, 32)$
+            tenemos que 
+            \begin{align*}
+                \left(\frac{72}{2}\right) P &= 36(1, 32) = \infty \\
+                \left(\frac{72}{3}\right) P &= 24(1, 32) = (20, 5)
+            \end{align*}
+            
+            Como $36P = \infty$, entonces no genera a $E$.
+            
+            Ahora bien, podemos seguir el siguiente camino: el órden de un
+            elemento en $E$ siempre será múltiplo de $36$ o $24$, y eso implica 
+            que $kP$, con $k = |P| \cdot i = 36 \; o \; 24$, genera el punto en el
+            infinito. Tomando un elemento $P$ cuyo órden pertenezca al conjunto
+            $O$, tenemos que 
+            
+            \newpage
+            \begin{equation*}
+                |P = (1, 32)| = 18 \Rightarrow 18 \cdot 2 = 36 \Rightarrow 
+                36P = \infty 
+            \end{equation*}
+            \begin{equation*}
+                |P = (2, 31)| = 6 \Rightarrow 6 \cdot 4 = 24 \Rightarrow 
+                24P = \infty
+            \end{equation*}
+            \begin{equation*}
+                |P = (3, 22)| = 12 \Rightarrow 12 \cdot 2 = 24 \Rightarrow
+                24P = \infty
+            \end{equation*}
+            \begin{equation*}
+                |P = (4, 5)| = 36 \Rightarrow 36 \cdot 1 = 36 \Rightarrow
+                36P = \infty
+            \end{equation*}
+            \begin{equation*}
+                |P = (5, 4)| = 4 \Rightarrow 4 \cdot 6 = 24 \Rightarrow
+                24P = \infty
+            \end{equation*}
+            \begin{equation*}
+                |P = (20, 5)| = 3 \Rightarrow 3 \cdot 8 = 24 \Rightarrow
+                24P = \infty
+            \end{equation*}
+            \begin{equation*}
+                |P = (27, 0)| = 2 \Rightarrow 2 \cdot 12 = 24 \Rightarrow
+                24P = \infty
+            \end{equation*}
+            \begin{equation*}
+                |P = (31, 32) = 9 \Rightarrow 9 \cdot 4 = 36 \Rightarrow
+                36P = \infty
+            \end{equation*}
+            
+            Notemos que todas las operaciones fueron verificadas con la función 
+            \texttt{suma\_puntos()}, implementada en el ejercicio \textit{2.c}. 
+            
+            Como $|\infty| = 1$ no puede ser el generador del grupo, y el órden
+            del resto de los puntos en $E$ oscila entre los valores del conjunto
+            $O$, eso quiere decir que todos los puntos generan el punto en el 
+            infinito, lo que implica que $E$ no es generado por ninguno de sus 
+            elementos. Por lo tanto, $E$ no es cíclico.
+            
+        \end{proof}
+
         % Ejercicio 2.c
         \item ¿Cuál es el máximo órden de un elemento en $\mathbb{E}$? Encuentra 
         un elemento que tenga este órden. 
+
+        \textsc{Solución:} Por un corolario del teorema de \textit{Lagrange}
+        sabemos que el órden de un punto siempre divide el órden del grupo
+        $E(\mathbb{F}_{71})$. 
+        
+        Dada la siguiente implementación
+        \begin{lstlisting}[language=Python]
+        # Regresa los divisores de un numero n.
+        def divisores(n):
+            div = []
+            for i in range (1, n):
+                if ((n % i) == 0):
+                    div.append(i)
+            
+            return div
+        
+        if __name__ == "__main__":
+            print(divisores(72))
+        \end{lstlisting}
+        
+        sabemos que 
+        \begin{verbatim}
+            D = [1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36]
+        \end{verbatim}
+        
+        son los posibles valores para el órden de cada uno de los puntos 
+        en $E (\mathbb{F}_{71})$. En particular, por el teorema de 
+        \textit{Lagrange} tenemos que $\#E (\mathbb{F}_{71})P = 72P = \infty$,
+        con $P \in E (\mathbb{F}_{71})$. 
+        
+        Ahora bien, el órden de un punto en $E (\mathbb{F}_{71})$ será el 
+        mínimo entero $k \in D$ tal que $kP = \infty$.  
+        
+        Dada la siguiente implementación
+        \begin{lstlisting}[language=Python]
+        '''
+        Regresa una tupla (mcd, s, t) que obtenemos al aplicar el algoritmo 
+        extendido de Euclides, donde as + bt = mcd(a, b) son los elementos 
+        que conforman la tupla.
+        '''
+        def aee(a, b):
+            s = 0; s_i = 1
+            t = 1; t_i = 0
+            g = b; g_i = a
+        
+            while g != 0:
+                cociente = g_i // g
+                g_i, g = g, g_i - cociente * g
+                s_i, s = s, s_i - cociente * s
+                t_i, t = t, t_i - cociente * t
+            return (g_i, s_i, t_i)
+            
+        # Regresa el inverso multiplicativo de a modulo m.
+        def inverso(a, m):
+            g, s, t = aee(a, m)
+            # El inverso de a modulo m existe si y solo si (a, m) = 1.
+            if g != 1:
+                print("No tiene inverso multiplicativo.")
+            else:
+                inverso = s % m
+            
+            return inverso
+            
+        # Regresa la suma de dos puntos P y Q en E. 
+        def suma_puntos(P, Q, A, p):
+            # Casos especiales.
+            if (P == None):
+                return Q
+            if (Q == None):
+                return  P
+                
+            x1, y1 = P
+            x2, y2 = Q
+            
+            if (x1 == x2):
+                m = (3 * x1 * x1 + A) * inverso(2 * y1, p)
+            else:
+                m = (y1 - y2) * inverso(x1 - x2, p)
+                
+            x3 = m * m - x1 - x2
+            y3 = m * (x1 - x3) - y1
+            suma = (x3 % p, y3 % p)
+            return suma
+        
+        # Regresa el orden de un elemento en E.
+        def orden(P, a, p):
+            # Como P = P y y_1 = 0 entonces P+P = infinito.
+            if(P[1] == 0):
+                return 2
+            
+            # Calculamos 2P.
+            P2 = suma_puntos(P, P, a, p)
+            aux = P2
+            
+            orden = 3
+            for i in range(0, p):
+                # Calculamos P + kP
+                aux = suma_puntos(P, aux, a, p)
+                # Si encontramos a 2P, entonces hemos encontrado el orden.
+                if(aux == P2):
+                    break
+                orden += 1
+            return orden
+        
+        # Regresa el orden de cada uno de los elementos en la lista puntos.
+        def get_ordenes(puntos, a, p):
+            ordenes = []
+            for punto in puntos:
+                o = orden(punto, a, p)
+                ordenes.append(o)
+            
+            return ordenes
+            
+        if __name__ == "__main__":
+            print(get_ordenes(encontrar_puntos(1, 28, 71), 1, 71))
+        \end{lstlisting}
+        
+        obtenemos la siguiente tabla, la cual indica el órden de cada uno de
+        los elementos que pertenecen a $E$.
+        \begin{center}
+        \begin{tabular}{c|c|c|c|c|c|c|c|c}
+        $|(1, 32)| = 18$ & $|(1, 39)| = 18$ & $|(2, 31)| = 6$ & $|(2, 40)| = 6$ & 
+        $|(3, 22)| = 12$ \\ \hline
+        $|(3, 49)| = 12$ & $|(4, 5)| = 36$ & $|(4, 66)| = 36$ & $|(5, 4)| = 4$ &
+        $|(5, 67)| = 4$  \\ \hline
+        $|(6, 26)| = 18$ & $|(6, 45)| = 18$ & $|(12, 8)| = 18$ & 
+        $|(12, 63)| = 18$ & $|(13, 26)| = 36$ \\ \hline
+        $|(13, 45)| = 36$ & $|(15, 9)| = 36$ & $|(15, 62)| = 36$ & 
+        $|(19, 27)| = 6$ & $|(19, 44)| = 6$ \\ \hline
+        $|(20, 5)| = 3$ & $|(20, 66)| = 3$ & $|(21, 3)| = 36$ & 
+        $|(21, 68)| = 36$ &  $|(22, 30)| = 18$ \\ \hline
+        $|(22, 41)| = 18$ & $|(23, 19) = 36$ & $|(23, 52)| = 36$ & 
+        $|(25, 22)| = 18$ & $|(25, 49)| = 18$ \\ \hline
+        $|(27, 0)| = 2$ & $|(31, 32)| = 9$ & $|(31, 39)| = 9$ &  
+        $|(33, 1)) = 36$ & $|(33, 70)| = 36$ \\  \hline
+        $|(34, 23)| = 36$ & $|(34, 48)| = 36$ & $|(35, 14)| = 12$ & 
+        $|(35, 57)| = 12$ & $|(36, 12)| = 9$ \\  \hline
+        $|(36, 59)| = 9$ & $|(37, 33)| = 36$ & $|(37, 38)| = 36$ & 
+        $|(39, 32)| = 6$ & $|(39, 39)| = 6$ \\ \hline
+        $|(41, 7)| = 36$ & $|(41, 64)| = 36$ & $|(43, 22)| = 36$ & 
+        $|(43, 49)| = 36$ & $|(47, 5)| = 36$ \\ \hline 
+        $|(47, 66)| = 36$ & $|(48, 11)| = 36$ & $|(48, 60)| = 36$ & 
+        $|(49, 24)| = 4$ & $|(49, 47)| = 4$ \\ \hline  
+        $|(52, 26)| = 12$ & $|(52, 45)| = 12$ & $|(53, 0)| = 2$ & 
+        $|(58, 27)| = 18$ & $|(58, 44)| = 18$ \\ \hline 
+        $|(61, 15)| = 18$ & $|(61, 56)| = 18$ & $|(62, 0)| = 2$ & 
+        $|(63, 17)| = 9$ & $|(63, 54)| = 9$ \\ \hline 
+        $|(65, 27)| = 18$ & $|(65, 44)| = 18$ & $|(66, 18)| = 12$ & 
+        $|(66, 53)| = 12$ & $|(69, 35)| = 18$ \\ \hline 
+        $|(69, 36)| = 18$ & $|\infty| = 1$ 
+        \end{tabular}
+        \end{center}
+        
+        Por lo tanto, el punto $P = (4, 5)$ con $|P| = 36$ es un
+        elemento en $E$ con el máximo órden.
     \end{enumerate}
 
     % Ejercicio 3.
