@@ -12,6 +12,7 @@ Ayudante Lab: José Canek García Aguilar
 
 #### Entorno
 * `OS: Manjaro Linux 20.0.3`
+* `pdfTex: Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux)`
 
 #### Contenido
 
