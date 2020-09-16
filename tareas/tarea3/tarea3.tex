@@ -266,6 +266,7 @@
         son los pares $(x, y) \pmod{n}$ con $x, y \in K$ tales que satisfacen
         la ecuación anterior, junto con el punto en el infinito. 
         
+        \newpage
         Dada la siguiente implementación
         \begin{lstlisting}[language = Python]
         '''
@@ -370,7 +371,6 @@
             infinito. Tomando un elemento $P$ cuyo órden pertenezca al conjunto
             $O$, tenemos que 
             
-            \newpage
             \begin{equation*}
                 |P = (1, 32)| = 18 \Rightarrow 18 \cdot 2 = 36 \Rightarrow 
                 36P = \infty 
@@ -502,6 +502,8 @@
             suma = (x3 % p, y3 % p)
             return suma
         
+
+
         # Regresa el orden de un elemento en E.
         def orden(P, a, p):
             # Como P = P y y_1 = 0 entonces P+P = infinito.
@@ -575,6 +577,7 @@
         elemento en $E$ con el máximo órden.
     \end{enumerate}
 
+    \newpage
     % Ejercicio 3.
     \item Sea $\mathbb{E} : y^2 - 2 = x^3 + 333x$ sobre $\mathbb{F}_{347}$ y 
     sea $P = (110, 136)$. 
@@ -654,6 +657,7 @@
 
     \end{enumerate}
 
+    \newpage
     % Ejercicio 4.
     \item Sea $\mathbb{E} : F(x, y) = y^2 - x^3 - 2x - 7$ sobre 
     $\mathbb{Z}_{31}$ con $\# \mathbb{E} = 39$ y $P = (2, 9)$ es un punto de 
