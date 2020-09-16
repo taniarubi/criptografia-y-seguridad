@@ -63,13 +63,193 @@
     \begin{enumerate}
         % Ejercicio 1.a
         \item Factoriza $35$ tratando de calcular $3Q$.
+
+        \textsc{Solución:} Recordemos la definición de suma de puntos:
+        
+        \begin{equation*}
+            P + Q =
+            \begin{cases}
+                \infty & \text{Si $x_1 = x_2$ y $-y_1 = y_2$}\\
+                (x_3,y_3) & \text{$x_3 = \lambda^2 - x_1 - x_2$ y $y_3 = 
+                \lambda (x_1 - x_3) - y_1$}
+            \end{cases}       
+        \end{equation*}
+        
+        Al igual que debemos recordar como calcular $\lambda$ :
+        \begin{equation*}
+            \lambda =
+            \begin{cases}
+                3x_1^2 + A \cdot (2y_1)^{-1} \pmod{p} & 
+                \text{si $P = Q$} \\
+                (y_1-y_2) \cdot (x_1 - x_2)^{-1} \pmod{p} & 
+                \text{en otro caso}
+            \end{cases}       
+        \end{equation*}
+
+        Además, tenemos que $\mathbb{E} : y^2 = x^3 - 20x + 21$. Primero, 
+        obtendremos $2Q$, para lo cual obtendremos primero el valor de 
+        $\lambda$. Como $Q = Q$, entonces 
+        \begin{align*}
+            \lambda
+            &= 3(15)^2 + (-20) \cdot 2(-4)^{-1} \pmod{35} \\ 
+            &= (3 \cdot 255) - 20 \cdot (-8)^{-1} \pmod{35} \\
+            &= 655 \cdot 13 \pmod{35} \\ 
+            &= 8515 \pmod{35} \\
+            &= 10
+        \end{align*}
+        
+        Ahora, calculamos el valor de $x_3$:
+        \begin{align*}
+            x_3
+            &= 10^2 - 15 - 15 \pmod{35} \\ 
+            &= 100 - 30 \pmod{35} \\
+            &= 70 \pmod{35} \\ 
+            &= 0
+        \end{align*}
+        
+        Finalmente, calculamos $y_3$:
+        \begin{align*}
+            x_3
+            &= 10(15 - 0) - (-4) \pmod{35} \\ 
+            &= 150 + 4 \pmod{35} \\
+            &= 154 \pmod{35} \\ 
+            &= 14
+        \end{align*}
+        
+        Por lo tanto, $2Q = (0,14)$. Ahora bien, procedemos a calcular 
+        $3Q = 2Q + Q$, y para ello realizamos los mismos pasos que en el 
+        cálculo anterior: como $2Q \neq Q$ entonces 
+        \begin{align*}
+            \lambda 
+            &= (14 - (-4)) \cdot (0 - 15)^{-1} \pmod{35} \\ 
+            &= 18 \cdot (-15)^{-1} \pmod{35}
+        \end{align*}
+
+        Pero, $15$ no tiene inverso multiplicativo en este caso, por lo que 
+        debemos encontrar el máximo común divisor de $(35, 15)$, el cual es 
+        $5$. De esta forma, determinamos que $5$ es un factor de $35$.
+    
         % Ejercicio 1.b
         \item Factoriza $35$ tratando de calcular $4Q$ duplicándolo.
+
+        \textsc{Solución:} Como ya tenemos calculado $2Q$, entonces haremos 
+        $2Q + 2Q$ para obtener $4Q$. Así, 
+        \begin{align*}
+             \lambda 
+             &= 3(0)^2 + (-20) \cdot (2 \cdot 14)^{-1} \pmod{35} \\
+             &= -20 \cdot (28)^{-1}
+        \end{align*}
+        
+        Pero, $28 = 2 \cdot 14$ no tiene inverso multiplicativo, por lo que 
+        debemos calcular el $MCD(28,35)$, el cual es $7$. De esta forma, podemos 
+        concluir que $7$ es un factor de $35$.
+
         % Ejercicio 1.c
         \item Calcula $3Q$ y $4Q$ sobre $\mathbb{E} \pmod{5}$ y sobre 
         $\mathbb{E} \pmod{7}$. Explica por qué el factor $5$ se obtiene 
-        calculando $3Q$ y por qué el factor $7$ se obtiene calculando $4Q$. 
+        calculando $3Q$ y por qué el factor $7$ se obtiene calculando $4Q$.
+        
+        \textsc{Solución:}
+        \begin{itemize}
+            \item $3Q$ sobre $\mathbb{E} \pmod{5}$. Tenemos que  
+            \begin{align*}
+                \mathbb{E}: y^2 
+                &= x^3 - 20x + 21 \pmod{35} \\ 
+                &= x^3 + 1 \pmod{35}
+            \end{align*}
+
+            Ahora bien, primero calcularemos $2Q$. Como $Q = (15, -4) = (0, 1) 
+            = Q$, entonces
+            \begin{align*}
+                \lambda 
+                &= (3(0)^2 + 0) \cdot (2 \cdot 1)^{-1} \pmod{5} \\ 
+                &= 0 \cdot (2)^{-1} \pmod{5} \\
+                &= 0 \cdot 3 \pmod{5} \\ 
+                &= 0
+            \end{align*}
+
+            Luego, calculamos $x_3$:
+            \begin{equation*}
+                x_3 = (0)^2 - 0 - 0 \pmod{5} = 0
+            \end{equation*}
+
+            Finalmente, calculamos $y_3$:
+            \begin{align*}
+                y_3
+                &= 0(0 - 0) - 1 \pmod{5} \\ 
+                &= 0 - 1 \pmod{5} \\ 
+                &= 4
+            \end{align*}
+
+            Por lo tanto, $2Q = (0, 4)$.
+
+            Para calcular $3Q$ haremos $2Q + Q$. Como los puntos son diferentes,
+            entonces
+            \begin{align*}
+                \lambda 
+                &= (4 - 1) \cdot (0 - 0)^{-1} \pmod{5} \\ 
+                &= 5 \cdot 0 \pmod{5} \\ 
+                &= 0
+            \end{align*}
+
+            Como $MCD(5, 0) = 5$, entonces tenemos que $5$ es un factor de $5$.
+
+            \item $4Q$ sobre $\mathbb{E} \pmod{7}$. Tenemos que 
+            \begin{align*}
+                \mathbb{E} : y^2 
+                &= x^3 - 20x + 21 \pmod{7} \\ 
+                &= x^3 + x \pmod{7}
+            \end{align*}
+
+            Ahora bien, primero calcularemos $2Q$. Como $Q = (15, -4) = (1, 3)
+            = Q$ entonces 
+            \begin{align*}
+                \lambda
+                &= (3(1)^2 + 1) \cdot (2 \cdot 3)^{-1} \pmod{7} \\
+                &= (3 + 1) \cdot (6)^-1 \pmod{7} \\
+                &= 4 \cdot 6 \pmod{7} \\
+                &= 24 \pmod{7} \\ 
+                &= 3
+            \end{align*}
+
+            Calculamos $x_3$:
+            \begin{align*}
+                x_3
+                &= (3)^2 - 1 - 1 \pmod{7} \\ 
+                &= 9 - 2 \pmod{7} \\ 
+                &= 7 \pmod{7} \\
+                &= 0
+            \end{align*}
+
+            Calculamos $y_3$:
+            \begin{align*}
+                y_3
+                &= 3(1 - 0) - 3 \pmod{7} \\ 
+                &= 3 - 3 \pmod{7} \\ 
+                &= 0
+            \end{align*}
+
+            Por lo tanto, $2Q = (0, 0)$.
+
+            Ahora bien, para calcular $4Q$ haremos $2Q + 2Q$. Como los dos puntos 
+            son iguales, entonces 
+            \begin{align*}
+                \lambda 
+                &= (3(0)^2 + 1) \cdot (2 \cdot 0)^{-1} \pmod{7} \\ 
+                &= 1 \cdot (0)^{-1} \pmod{7}
+            \end{align*}
+
+            Pero $0$ no tiene inverso multiplicativo en este caso, y como 
+            $MCD(7, 0) = 7$ entonces tenemos que $7$ es un factor de $7$.
+        \end{itemize}
     \end{enumerate}
+
+    En cada suma se verifica si el máximo común divisor de ($5$ o $7$) y $k$ es 
+    diferente de $1$ (donde $k$ es el número al cual le sacaremos el inverso en 
+    la lambda). Si el $MCD$ no es $1$, eso significa que existe un entero $n$ 
+    que divide a $5$ y a $k$, pero como $5$ y $7$ son primos, eso quiere decir 
+    que ellos mismos son los números que se dividen. Por este motivo, obtenemos 
+    a $5$ y $7$ como factores.
 
     % Ejercicio 2.
     \item Sea $\mathbb{E}$ la curva elíptica $y^2 = x^3 + x + 28$ definida sobre 
@@ -483,11 +663,33 @@
     \begin{enumerate}
         % Ejercicio 4.a
         \item Calcula $Q = mP$.
+        
+        \textsc{Solución:} Usando la función \texttt{suma\_puntos()}, implementada
+        en el ejercicio \textit{2.c}, obtenemos que 
+        \begin{equation*}
+            Q = 8(2, 9) = (8, 15)
+        \end{equation*}
+
         % Ejercicio 4.b
         \item Descifra la siguiente cadena de texto cifrado 
         \begin{equation*}
             ((18, 1), 21), ((3, 1), 18), ((17, 0), 19), ((28, 0), 8)
         \end{equation*}
+
+        \textsc{Solución:} Primero, desciframos la tupla $((18, 1), 21)$. 
+        Como $18 \in \mathbb{Z}_{31}$ y $1 \in \mathbb{Z}_{2}$, entonces debemos 
+        evaluar a $18$ en $y^2 = x^3 + 2x + 7 \pmod{31}$. Así,  
+        \begin{align*}
+            y^2 &= 18^3 + 2(18) + 7 \pmod{31} \\ 
+            y^2 &= 5832 + 36 + 7 \pmod{31} \\ 
+            y^2 &= 5875 \pmod{31} \\ 
+            y^2 &\equiv 16
+        \end{align*}
+
+        Por lo que $y = \pm 4 \pmod{31}$. Notemos que el segundo elemento de 
+        la tupla $(18, 1)$ nos dice que $y \equiv 1 \pmod{2}$, pero 
+        $-4 \equiv 27 \pmod{31}$ pero $27 \not \equiv 1 \pmod{2}$.
+
         % Ejercicio 4.c
         \item Supongamos que cada texto plano representa un carácter alfabético,
         convierte el texto plano en una palabra en Inglés. Usa la asociación 
